@@ -1,0 +1,117 @@
+html {
+    background-color: #2196F3;
+}
+
+aside#navigateur {
+    float: left;
+    width: 20%;
+    border-style: none solid none none;
+    border-width: 3px;
+}
+
+aside#navigateur h4 {
+    text-align: center;
+}
+
+header h1 {
+    text-align: center;
+}
+
+div#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+div#navbar li {
+    float: left;
+}
+
+div#navbar ul {   
+    border-radius: 15px;
+    width: auto;
+    display: inline-block;
+}
+  
+div#navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+  
+/* Change the link color to #111 (black) on hover */
+div#navbar li a:hover {
+    background-color: #111;
+}
+
+div#navbar a {
+      float: center;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  
+/* Style the search field */
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+  
+/* Style the submit button */
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+@keyframes slidy {
+    0% { left: 0%; }
+    20% { left: 0%; }
+    25% { left: -100%; }
+    45% { left: -100%; }
+    50% { left: -200%; }
+    70% { left: -200%; }
+    75% { left: -300%; }
+    95% { left: -300%; }
+    100% { left: -400%; }
+}
+
+body { margin: 0; } 
+div#slider { overflow: hidden; }
+div#slider figure img { width: 20%; float: left; }
+div#slider figure { 
+    position: relative;
+    width: 200%;
+    margin: 0;
+    left: 0;
+    text-align: left;
+    font-size: 0;
+    animation: 5s slidy infinite; 
+}
