@@ -14,9 +14,9 @@ if(isset($_POST['pseudo']) && isset($_POST['mdp']))
     // pour éliminer toute attaque de type injection SQL et XSS
     $pseudo = mysqli_real_escape_string($db,htmlspecialchars($_POST['pseudo'])); 
     $mdp = mysqli_real_escape_string($db,htmlspecialchars($_POST['mdp']));
+    $mdp= md5($mdp);
     
-    if($pseudo !== "" && $mdp !== "")
-    {
+    if($pseudo !== "" && $mdp !== "") {
         $requete = "SELECT count(*) FROM users where 
               pseudo = '".$pseudo."' and mdp = '".$mdp."' ";
         $exec_requete = mysqli_query($db,$requete);
