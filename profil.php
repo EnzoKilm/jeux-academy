@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Jeux Academy | Accueil</title>
+    <title>Jeux Academy | Profil</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,10 +26,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Accueil
-                        <span class="sr-only">(actuelle)</span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <?php
                 session_start();
@@ -41,7 +39,7 @@
                 }
                 else if(isset($_SESSION['pseudo'])) {
                     $user = $_SESSION['pseudo'];
-                    echo "<li class='nav-item'><a class='nav-link' href='profil.php'>Profil</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link active' href='profil.php'>Profil<span class='sr-only'>(actuelle)</span></a></li>";
                     echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'>Déconnexion</a></li>";
                 }
                 else {
