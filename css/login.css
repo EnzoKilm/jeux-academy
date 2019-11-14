@@ -5,7 +5,7 @@ div#container {
 
 /* Bordered form */
 form {
-    width:100%;
+    width: 80%;
     padding: 20px;
     border: 1px solid #f1f1f1;
     background: #fff;
@@ -14,7 +14,7 @@ form {
 }
 
 #container h1{
-    width: 38%;
+    text-align: center;
     margin: 0 auto;
     padding-bottom: 10px;
 }
@@ -49,6 +49,7 @@ input[type=submit]:hover {
     width: 45%;
     display: block;
     float: left;
+    margin-left: 8%;
 }
 .divRight {
     width: 45%;

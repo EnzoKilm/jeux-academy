@@ -10,7 +10,7 @@
     <title>Jeux Academy | Profil</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
@@ -208,7 +208,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
     <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    <p class="m-0 text-center text-white">Copyright &copy; Jeux Academy 2019</p>
     </div>
     <!-- /.container -->
     </footer>

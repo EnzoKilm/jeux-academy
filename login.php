@@ -10,7 +10,7 @@
     <title>Jeux Academy | Connexion/inscription</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css" media="screen" type="text/css" />
 
     <!-- Custom styles for this template -->
@@ -82,12 +82,21 @@
                 <input type="password" placeholder="Entrer un mot de passe" name="mdp" required>
                 <label><b>Confirmation du mot de passe</b></label>
                 <input type="password" placeholder="Entrer à nouveau le mot de passe" name="repmdp" required><br><br>
-                <input type="submit" name="submit" value="Inscription">
                 <?php
                 if(isset($_GET['success'])) {
-                    echo "<p style='color:green'>Inscription réussie, vous pouvez désormais vous connecter</p>";
+                    echo "<p style='color:green'>Inscription réussie, vous pouvez désormais vous connecter.</p>";
+                }
+                else if(isset($_GET['invalidname'])) {
+                    echo "<p style='color:red'>Le pseudo que vous avez indiqué est déjà pris.</p>";
+                }
+                else if(isset($_GET['incorrectrep'])) {
+                    echo "<p style='color:orange'>Les mots de passe ne sont pas identiques.</p>";
+                }
+                else if(isset($_GET['court'])) {
+                    echo "<p style='color:orange'>Le mot de passe est trop court !</p>";
                 }
                 ?>
+                <input type="submit" name="submit" value="Inscription">
             </form>
         </span>
     </div>
@@ -96,7 +105,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Jeux Academy 2019</p>
         </div>
         <!-- /.container -->
     </footer>

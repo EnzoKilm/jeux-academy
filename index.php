@@ -10,7 +10,7 @@
     <title>Jeux Academy | Accueil</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
@@ -40,7 +40,6 @@
                         }
                 }
                 else if(isset($_SESSION['pseudo'])) {
-                    $user = $_SESSION['pseudo'];
                     echo "<li class='nav-item'><a class='nav-link' href='profil.php'>Profil</a></li>";
                     echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'>Déconnexion</a></li>";
                 }
@@ -206,7 +205,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
     <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    <p class="m-0 text-center text-white">Copyright &copy; Jeux Academy 2019</p>
     </div>
     <!-- /.container -->
     </footer>

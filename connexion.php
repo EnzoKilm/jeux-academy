@@ -20,13 +20,12 @@ if(isset($_POST['pseudo']) && isset($_POST['mdp'])) {
    $exec_requete = mysqli_query($db,$requete);
    $reponse      = mysqli_fetch_array($exec_requete);
    $count = $reponse['count(*)'];
-   if($count!=0) // nom d'utilisateur et mot de passe correctes
-   {
+   // nom d'utilisateur et mot de passe correctes
+   if($count!=0) {
       $_SESSION['pseudo'] = $pseudo;
       header('Location: index.php');
    }
-   else
-   {
+   else {
       header('Location: login.php?erreur=1'); // utilisateur ou mot de passe incorrect
    }
 }
