@@ -96,16 +96,15 @@
                 </div>
 
                 <div class="row">
-
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a>
+                        <a href="cassebriques.php"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                            <a href="#">Casse briques</a>
+                            <a href="cassebriques.php">Casse briques</a>
                             </h4>
                             <h5>Nouveau</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">Casse les briques à l'aide de la balle et de la raquette.</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -118,10 +117,10 @@
                         <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                            <a href="#">Item Two</a>
+                            <a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a>
                             </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+                            <h5></h5>
+                            <p class="card-text">Nos développeurs te préparent de nouveaux jeux, patience!</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -134,17 +133,16 @@
                         <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                            <a href="#">Item Three</a>
+                            <a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a>
                             </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <h5></h5>
+                            <p class="card-text">Nos développeurs te préparent de nouveaux jeux, patience!</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                         </div>
                         </div>
                     </div>
-                
                 </div>
                 <!-- /.row -->
 
