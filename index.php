@@ -11,25 +11,27 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.php">Jeux Academy</a>
+            <a class="navbar-brand" href="index.php"><i class="fas fa-gamepad"></i> Jeux Academy</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Accueil
-                        <span class="sr-only">(actuelle)</span>
-                    </a>
+                    <a class="nav-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
                 </li>
                 <?php
                 session_start();
@@ -40,11 +42,11 @@
                         }
                 }
                 else if(isset($_SESSION['pseudo'])) {
-                    echo "<li class='nav-item'><a class='nav-link' href='profil.php'>Profil</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'>Déconnexion</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='profil.php'><i class='fas fa-user'></i> Profil</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'><i class='fas fa-sign-out-alt'></i> Déconnexion</a></li>";
                 }
                 else {
-                    echo "<a class='nav-link' href='login.php'>Connexion/inscription</a>";
+                    echo "<a class='nav-link' href='login.php'><i class='fas fa-sign-in-alt'></i> Connexion/inscription</a>";
                 }
                 ?>
             </ul>
@@ -57,6 +59,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <h1 class="my-4">Les tops</h1>
+                <img src="images/trophee.png" alt="Trophée" id="trophee">
                 <div class="list-group">
                 <a href="#" class="list-group-item">Jeux</a>
                 <a href="#" class="list-group-item">Joueurs</a>
@@ -96,12 +99,12 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="#"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                            <a href="#">Item One</a>
+                            <a href="#">Casse briques</a>
                             </h4>
-                            <h5>$24.99</h5>
+                            <h5>Nouveau</h5>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
                         </div>
                         <div class="card-footer">
@@ -141,55 +144,7 @@
                         </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <a href="#">Item Four</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <a href="#">Item Five</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <a href="#">Item Six</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                    </div>
-                </div>
-
+                
                 </div>
                 <!-- /.row -->
 

@@ -5,7 +5,7 @@
     <title>Casse Briques</title>
     <style>
      * { padding: 0; margin: 0; }
-     canvas { background: url(images/fond_redi.jpg) no-repeat center center; display: block; margin: 0 auto; border-style: solid; }
+     canvas { background: #eee no-repeat center center; display: block; margin: 0 auto; border-style: solid; }
      button { display: block; margin: auto; }
     </style>
 </head>
@@ -13,6 +13,10 @@
 
 <br/>
 <canvas id="myCanvas" width="960" height="640"></canvas><br/>
+
+<?php
+$fichierTxt = file_get_contents('map.txt');
+?>
 
 <script>var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
@@ -34,11 +38,16 @@
     var leftPressed = false;
     var brickRowCount = 9;
     var brickColumnCount = 11;
-    var brickWidth = 75;
-    var brickHeight = 20;
+    var brickTxt = <?php
+    $fichierTxt = file_get_contents('map.txt');
+    echo json_encode($fichierTxt, JSON_HEX_TAG);
+    ?>;
+    var brickWidth = 80;
+    var brickHeight = 25;
     var brickPadding = 2;
     var brickOffsetTop = 30;
     var brickOffsetLeft = 30;
+    var brickCount = 0;
     var score = 0;
     var jouer = false;
     var compteur = 3;
@@ -54,12 +63,34 @@
     var balleFeu = false;
     var tempsDepartFeu = 0;
     var tempsFinFeu = 0;
-    
+
+    brickTxt = brickTxt.replace(/(\r\n|\n|\r)/gm,"X");
+
+    var listeLigne = [];
+    var ligne = "";
+    for(var i = 0; i < brickTxt.length; i++) {
+        if(brickTxt[i] == "X") {
+            listeLigne.push(ligne);
+            ligne = ""
+        }
+        else {
+            ligne += brickTxt[i];
+        }
+    }
+    listeLigne.push(ligne);
+
     var bricks = [];
     for(var c=0; c<brickColumnCount; c++) {
         bricks[c] = [];
         for(var r=0; r<brickRowCount; r++) {
-            bricks[c][r] = { x: 0, y: 0, status: 1 };
+            for(var i=0; i<=9; i++) {
+                if(i == listeLigne[r][c]) {
+                    bricks[c][r] = { x: 0, y: 0, status: i };
+                    if(listeLigne[r][c] != 9) {
+                        brickCount += i;
+                    }
+                }
+            }
         }
     }
     
@@ -121,14 +152,25 @@
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
                 var b = bricks[c][r];
-                if(b.status == 1) {
+                if(b.status == 9) {
+                    if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
+                        dy = -dy;
+                    }
+                }
+                else if(b.status >= 1 && b.status != 9) {
                     if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
                         if(balleFeu == false) {
                             dy = -dy;
+                            /*if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
+                                dy = -dy;
+                            }
+                            else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
+                                dx = -dx;
+                            }*/
                         }
-                        b.status = 0;
+                        b.status -= 1;
                         score++;
-                        if(score == brickRowCount*brickColumnCount) {
+                        if(score == brickCount) {
                             alert("Bravo, vous avez gagné!");
                             document.location.reload();
                         }
@@ -154,7 +196,7 @@
                     }
                     else if(doubleX+ballRadius > b.x && doubleX-ballRadius < b.x+brickWidth && doubleY+ballRadius > b.y && doubleY-ballRadius < b.y+brickHeight) {
                         doubleDy = -doubleDy;
-                        b.status = 0;
+                        b.status -= 1;
                         score++;
                         if(score == brickRowCount*brickColumnCount) {
                             alert("Bravo, vous avez gagné!");
@@ -232,7 +274,7 @@
     function drawCompteur() {
         var tailleCompteur = 200;
         ctx.font = tailleCompteur+"px Arial";
-        ctx.fillStyle = "#FFFFFF";
+        ctx.fillStyle = "#000000";
         ctx.fillText(compteur, canvas.width/2-tailleCompteur/4, canvas.height/2+tailleCompteur/4);
     }
     
@@ -243,7 +285,7 @@
             ctx.fillStyle = "#FF6000";
         }
         else {
-            ctx.fillStyle = "#FFFFFF";
+            ctx.fillStyle = "#000000";
         }
         ctx.fill();
         ctx.closePath();
@@ -288,18 +330,20 @@
         ctx.fill();
         ctx.closePath();
     }
-    
+
+    var brickNumbers = [1, 2, 3, 9]
+    var brickColors = ["#F0F005", "#FF8000", "#FF0000", "#1E1E1D"]
     function drawBricks() {
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
-                if(bricks[c][r].status == 1) {
+                if(brickNumbers.includes(bricks[c][r].status)) {
                     var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
                     var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
                     bricks[c][r].x = brickX;
                     bricks[c][r].y = brickY;
                     ctx.beginPath();
                     ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = "#0095DD";
+                    ctx.fillStyle = brickColors[brickNumbers.indexOf(bricks[c][r].status)];
                     ctx.fill();
                     ctx.closePath();
                 }

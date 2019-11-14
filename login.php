@@ -16,6 +16,8 @@
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -23,19 +25,17 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-        <a class="navbar-brand" href="index.php">Jeux Academy</a>
+        <a class="navbar-brand" href="index.php"><i class="fas fa-gamepad"></i> Jeux Academy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php">Accueil</a>
+                <a class="nav-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="login.php">Connexion/inscription
-                    <span class="sr-only">(actuelle)</span>
-                </a>
+                <a class="nav-link" href="login.php"><i class='fas fa-sign-in-alt'></i> Connexion/inscription</a>
             </li>
             </ul>
         </div>
