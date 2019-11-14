@@ -34,10 +34,10 @@
                 <?php
                 session_start();
                 if(isset($_GET['deconnexion'])) { 
-                if($_GET['deconnexion']==true) {  
-                    session_unset();
-                    header("location:index.php");
-                    }
+                    if($_GET['deconnexion']==true) {  
+                        session_unset();
+                        header("location:index.php");
+                        }
                 }
                 else if(isset($_SESSION['pseudo'])) {
                     $user = $_SESSION['pseudo'];

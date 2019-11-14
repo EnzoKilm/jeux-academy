@@ -14,6 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -32,18 +33,19 @@
                 <?php
                 session_start();
                 if(isset($_GET['deconnexion'])) { 
-                if($_GET['deconnexion']==true) {  
+                if($_GET['deconnexion']==true) {
                     session_unset();
                     header("location:index.php");
                     }
                 }
                 else if(isset($_SESSION['pseudo'])) {
-                    $user = $_SESSION['pseudo'];
                     echo "<li class='nav-item'><a class='nav-link active' href='profil.php'>Profil<span class='sr-only'>(actuelle)</span></a></li>";
                     echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'>Déconnexion</a></li>";
                 }
                 else {
                     echo "<a class='nav-link' href='login.php'>Connexion/inscription</a>";
+                    header('Location: index.php');
+                    session_unset();
                 }
                 ?>
             </ul>
@@ -54,15 +56,6 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <h1 class="my-4">Les tops</h1>
-                <div class="list-group">
-                <a href="#" class="list-group-item">Jeux</a>
-                <a href="#" class="list-group-item">Joueurs</a>
-                </div>
-            </div>
-            <!-- /.col-lg-3 -->
-
             <div class="col-lg-9">
                 <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -194,7 +187,18 @@
 
             </div>
             <!-- /.col-lg-9 -->
-
+            
+            <div class="col-lg-3">
+                <?php
+                $user = $_SESSION['pseudo'];
+                echo "<h1 class='my-4'>$user</h1>";
+                ?>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Jeux préférés</a>
+                    <a href="#" class="list-group-item">Joueurs</a>
+                </div>
+            </div>
+            <!-- /.col-lg-3 -->
         </div>
         <!-- /.row -->
 
