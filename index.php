@@ -26,7 +26,7 @@
 
     <div id="navbar">
         <ul>
-            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.php">Accueil</a></li>
         </ul>
         <ul>
             <li>
@@ -37,7 +37,7 @@
             </li>
         </ul>
         <ul>
-            <li><a href="connexion.php">Connexion</a></li>
+            <li><a href="login.php">Connexion</a></li>
         </ul>
     </div>
 

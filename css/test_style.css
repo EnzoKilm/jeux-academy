@@ -2,7 +2,7 @@ body{
     background: #2196F3;
 }
 #container{
-    width:400px;
+    width:60%;
     margin:0 auto;
     margin-top:2%;
     margin-bottom:2%;
@@ -10,11 +10,13 @@ body{
 /* Bordered form */
 form {
     width:100%;
-    padding: 30px;
+    padding: 20px;
     border: 1px solid #f1f1f1;
     background: #fff;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    display: block;
 }
+
 #container h1{
     width: 38%;
     margin: 0 auto;
@@ -45,4 +47,15 @@ input[type=submit]:hover {
     background-color: white;
     color: #2196F3;
     border: 1px solid #2196F3;
+}
+
+.divLeft {
+    width: 45%;
+    display: block;
+    float: left;
+}
+.divRight {
+    width: 45%;
+    display: block;
+    float: right;
 }

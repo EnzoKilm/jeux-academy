@@ -3,12 +3,19 @@
        <meta charset="utf-8">
         <!-- importer le fichier de style -->
         <link rel="stylesheet" href="css/test_style.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
     </head>
     <body>
+        <div id="navbar">
+            <ul>
+                <li><a href="index.php">Accueil</a></li>
+            </ul>
+        </div>
+
         <div id="container">
             <!-- zone de connexion -->
             
-            <div id="connexion">
+            <span class="divLeft">
                 <form method="post" action="connexion.php">
                     <h1>Connexion</h1>
                     
@@ -27,9 +34,9 @@
                     }
                     ?>
                 </form>
-            </div>
+            </span>
 
-            <div id="inscription">
+            <span class="divRight">
                 <form method="post" action="inscription.php">
                     <h1>Inscription</h1>
                     <label><b>Pseudo</b></label>
@@ -51,7 +58,8 @@
                     }
                     ?>
                 </form>
-            </div>
+            </span>
         </div>
+
     </body>
 </html>
