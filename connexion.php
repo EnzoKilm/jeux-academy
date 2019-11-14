@@ -25,7 +25,7 @@ if(isset($_POST['pseudo']) && isset($_POST['mdp']))
         if($count!=0) // nom d'utilisateur et mot de passe correctes
         {
            $_SESSION['pseudo'] = $pseudo;
-           header('Location: principale.php');
+           header('Location: index.php');
         }
         else
         {
