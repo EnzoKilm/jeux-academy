@@ -44,7 +44,7 @@
                 }
                 else {
                     echo "<a class='nav-link' href='login.php'>Connexion/inscription</a>";
-                    header('Location: index.php');
+                    header('Location: login.php');
                     session_unset();
                 }
                 ?>
