@@ -30,7 +30,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="index.php">Accueil
-              <span class="sr-only">(current)</span>
+              <span class="sr-only">(actuelle)</span>
             </a>
           </li>
           <li class="nav-item">
