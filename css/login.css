@@ -1,12 +1,8 @@
-body{
-    background: #2196F3;
+div#container {
+    margin: 2%;
+    padding-bottom: 52%;
 }
-#container{
-    width:60%;
-    margin:0 auto;
-    margin-top:2%;
-    margin-bottom:2%;
-}
+
 /* Bordered form */
 form {
     width:100%;
