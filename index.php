@@ -58,7 +58,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <h1 class="my-4">Les tops</h1>
+                <h1 class="my-4"><i class="fas fa-trophy"></i> Les tops</h1>
                 <img src="images/trophee.png" alt="Trophée" id="trophee">
                 <div class="list-group">
                 <a href="#" class="list-group-item">Jeux</a>
