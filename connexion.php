@@ -7,7 +7,7 @@ if(isset($_POST['pseudo']) && isset($_POST['mdp'])) {
    $db_name     = 'jeux-academy';
    $db_host     = 'localhost';
    $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
-         or die('could not connect to database');
+         or die('Connexion à la base de données impossible.');
    
    // on applique les deux fonctions mysqli_real_escape_string et htmlspecialchars
    // pour éliminer toute attaque de type injection SQL et XSS
