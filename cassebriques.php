@@ -48,7 +48,7 @@
                 }
                 else if(isset($_SESSION['pseudo'])) {
                     echo "<li class='nav-item'><a class='nav-link' href='profil.php'><i class='fas fa-user'></i> Profil</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'><i class='fas fa-sign-in-alt'></i> Déconnexion</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'><i class='fas fa-sign-out-alt'></i> Déconnexion</a></li>";
                 }
                 else {
                     echo "<a class='nav-link' href='login.php'><i class='fas fa-sign-in-alt'></i> Connexion/inscription</a>";
@@ -63,7 +63,7 @@
 
     <!-- Page Content -->
     <div class="container">
-            <div class="row">
+        <div class="row">
             <?php
             // connexion à la base de données
             $db_username = 'root';
@@ -73,18 +73,35 @@
             $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
                     or die('Connexion à la base de données impossible.');
 
-            $sql = "SELECT map FROM casse_briques_settings WHERE id='2'";
+            // On récupère l'id du joueur
+            $sql = "SELECT id FROM users where pseudo = '".$_SESSION['pseudo']."'";
             $result = mysqli_query($db,$sql);
             $value = mysqli_fetch_array($result);
-            //$map = $value->id;
-            $resultat = $value[0];
+            $id = $value[0];
+
+            // On regarde le niveau du joueur
+            $requete = "SELECT niveau FROM casse_briques_users where id_joueur = '".$id."'";
+            $exec_requete = mysqli_query($db,$requete);
+            $reponse = mysqli_fetch_array($exec_requete);
+            $niveau = $reponse[0];
+
+            // Si le joueur n'a pas encore joué au jeu
+            if(isset($resultat)) {
+                // On ajoute ses infos dans la table du jeu dans la db
+                $requete = "INSERT INTO casse_briques_users(id_joueur,niveau) VALUES ('".$id."',1)";
+            }
+            
+            $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$id."'";
+            $result = mysqli_query($db,$requete);
+            $value = mysqli_fetch_array($result);
+            $map = $value[0];
 
             mysqli_close($db); // fermer la connexion            
             ?>
         </div>
         <!-- /.row -->
         
-        <br/><canvas id="cassebriques" width="960" height="640"></canvas><br/>
+        <br/><canvas id="cassebriques" width="916" height="640"></canvas><br/>
 
     </div>
     <!-- /.container -->
@@ -100,10 +117,9 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <?php
-    $fichierTxt = file_get_contents('map.txt');
-    ?>
     <script>
+        // BALLE VA DANS BRIQUE INVINCIBLE
+        // !! REFAIRE LE SYSTÈME DE BOUNCE !!
         var canvas = document.getElementById("cassebriques");
         var ctx = canvas.getContext("2d");
         var dx = 2.5;
@@ -125,18 +141,18 @@
         var brickRowCount = 9;
         var brickColumnCount = 11;
         var brickTxt = <?php 
-        echo json_encode($resultat);
+        echo json_encode($map);
         ?>;
         var brickWidth = 80;
         var brickHeight = 25;
         var brickPadding = 2;
-        var brickOffsetTop = 30;
-        var brickOffsetLeft = 30;
+        var brickOffsetTop = 8;
+        var brickOffsetLeft = 8;
         var brickCount = 0;
         var score = 0;
         var jouer = false;
         var compteur = 3;
-        var lives = 3;
+        var lives = 2;
         var depart = false;
         var powerup = false;
         var powerupRadius = 12;
@@ -153,10 +169,10 @@
 
         var listeLigne = [];
         var ligne = "";
-        for(var i = 0; i < brickTxt.length; i++) {
+        for(var i = 0; i < brickTxt.length+1; i++) {
             if(brickTxt[i] == "X") {
                 listeLigne.push(ligne);
-                ligne = ""
+                ligne = "";
             }
             else {
                 ligne += brickTxt[i];
@@ -178,7 +194,7 @@
                 }
             }
         }
-        
+
         if(Math.round(Math.random()) == 0) {
             var start = "left";
         }
@@ -241,6 +257,9 @@
                         if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
                             dy = -dy;
                         }
+                        else if(doubleX+ballRadius > b.x && doubleX-ballRadius < b.x+brickWidth && doubleY+ballRadius > b.y && doubleY-ballRadius < b.y+brickHeight) {
+                            doubleDy = -doubleDy;
+                        }
                     }
                     else if(b.status >= 1 && b.status != 9) {
                         if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
@@ -255,9 +274,8 @@
                             }
                             b.status -= 1;
                             score++;
-                            if(score == brickCount) {
-                                alert("Bravo, vous avez gagné!");
-                                document.location.reload();
+                            if(score == 1) {
+                                window.location.replace("cassebriqueslvlup.php");
                             }
                             else {
                                 if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
@@ -283,8 +301,7 @@
                             doubleDy = -doubleDy;
                             b.status -= 1;
                             score++;
-                            if(score == brickRowCount*brickColumnCount) {
-                                alert("Bravo, vous avez gagné!");
+                            if(score == brickCount) {
                                 document.location.reload();
                             }
                         }
@@ -345,15 +362,15 @@
         }
         
         function drawScore() {
-            ctx.font = "16px Arial";
+            ctx.font = "24px Arial";
             ctx.fillStyle = "#0095DD";
-            ctx.fillText("Score: "+score, 8, 20);
+            ctx.fillText("Score: "+score, 10, canvas.height-16);
         }
         
         function drawLives() {
-            ctx.font = "16px Arial";
+            ctx.font = "24px Arial";
             ctx.fillStyle = "#0095DD";
-            ctx.fillText("Vies: "+lives, canvas.width-60, 20);
+            ctx.fillText("Balles: "+lives, canvas.width-100, canvas.height-16);
         }
         
         function drawCompteur() {
@@ -486,16 +503,20 @@
                 powerupY += powerupDY;
             }
             
+            // Si la balle sort de l'écran (largeur)
             if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
                 dx = -dx;
             }
             else if(doubleX + dx > canvas.width-ballRadius || doubleX + doubleDx < ballRadius) {
                 doubleDx = -doubleDx;
             }
-        
+            
+            // Si la balle sort de l'écran 
             if(y + dy < ballRadius) {
                 dy = -dy;
-            } else if(y + dy + ballRadius/2 > canvas.height - paddleHeight) {
+            }
+            // Si la balle sort de l'écran (longueur)
+            else if(y + dy + ballRadius/2 > canvas.height - paddleHeight) {
                 if(x > paddleX - ballRadius/2 && x < paddleX + paddleWidth + ballRadius) {
                     dy = -dy;
                 }   
@@ -516,7 +537,8 @@
             }
             if(doubleY + doubleDy < ballRadius) {
                 doubleDy = -doubleDy;
-            } else if(doubleY + doubleDy + ballRadius/2 > canvas.height - paddleHeight) {
+            }
+            else if(doubleY + doubleDy + ballRadius/2 > canvas.height - paddleHeight) {
                 if(doubleX > paddleX - ballRadius/2 && doubleX < paddleX + paddleWidth + ballRadius) {
                     doubleDy = -doubleDy;
                 }   

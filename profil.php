@@ -43,7 +43,7 @@
                 }
                 else if(isset($_SESSION['pseudo'])) {
                     echo "<li class='nav-item'><a class='nav-link active' href='profil.php'><i class='fas fa-user'></i> Profil</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'><i class='fas fa-sign-in-alt'></i> Déconnexion</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'><i class='fas fa-sign-out-alt'></i> Déconnexion</a></li>";
                 }
                 else {
                     echo "<a class='nav-link' href='login.php'><i class='fas fa-sign-in-alt'></i> Connexion/inscription</a>";

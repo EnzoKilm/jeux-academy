@@ -82,6 +82,7 @@
                 <input type="password" placeholder="Entrer un mot de passe" name="mdp" required>
                 <label><b>Confirmation du mot de passe</b></label>
                 <input type="password" placeholder="Entrer à nouveau le mot de passe" name="repmdp" required><br><br>
+                <input type="submit" name="submit" value="Inscription">
                 <?php
                 if(isset($_GET['success'])) {
                     echo "<p style='color:green'>Inscription réussie, vous pouvez désormais vous connecter.</p>";
@@ -96,7 +97,6 @@
                     echo "<p style='color:orange'>Le mot de passe est trop court !</p>";
                 }
                 ?>
-                <input type="submit" name="submit" value="Inscription">
             </form>
         </span>
     </div>
