@@ -91,7 +91,7 @@
                 $requete = "INSERT INTO casse_briques_users(id_joueur,niveau) VALUES ('".$id."',1)";
             }
             
-            $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$id."'";
+            $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$niveau."'";
             $result = mysqli_query($db,$requete);
             $value = mysqli_fetch_array($result);
             $map = $value[0];
@@ -152,7 +152,7 @@
         var score = 0;
         var jouer = false;
         var compteur = 3;
-        var lives = 2;
+        var lives = 3;
         var depart = false;
         var powerup = false;
         var powerupRadius = 12;
@@ -195,18 +195,21 @@
             }
         }
 
+        /////////////////////////////////////////////////////////
         if(Math.round(Math.random()) == 0) {
             var start = "left";
         }
         else {
             var start = "right";
         }
+        /////////////////////////////////////////////////////////
         
         document.addEventListener("keydown", keyDownHandler, false);
         document.addEventListener("keyup", keyUpHandler, false);
         document.addEventListener("mousemove", mouseMoveHandler, false);
         document.addEventListener("click", commencer, false);
         
+        // Compteur du début de partie
         function commencer() {
             if(jouer == false && depart == false) {
                 depart = true;
@@ -249,6 +252,7 @@
             }
         }
         
+        // Détection des collisions entre la balle et les briques
         function collisionDetection() {
             for(var c=0; c<brickColumnCount; c++) {
                 for(var r=0; r<brickRowCount; r++) {
@@ -274,7 +278,7 @@
                             }
                             b.status -= 1;
                             score++;
-                            if(score == 1) {
+                            if(score == brickCount) {
                                 window.location.replace("cassebriqueslvlup.php");
                             }
                             else {
@@ -302,7 +306,7 @@
                             b.status -= 1;
                             score++;
                             if(score == brickCount) {
-                                document.location.reload();
+                                window.location.replace("cassebriqueslvlup.php");
                             }
                         }
                     }
@@ -310,6 +314,7 @@
             }
         }
         
+        // Activation des powerups lorsqu'ils touchent la raquette
         function powerupActivation() {
             if(powerupX + powerupRadius/2 > paddleX && powerupX - powerupRadius/2 < paddleX + paddleWidth && powerupY + powerupRadius >= canvas.height - paddleHeight) {
                 powerupStatus = 0;
@@ -335,6 +340,7 @@
             }
         }
         
+        // Création/dessin des powerups
         function drawPowerUp(type) {
             if(powerupStatus == 1) {
                 if(type == "grandeRaquette") {
@@ -361,18 +367,21 @@
             }
         }
         
+        // Écriture du score
         function drawScore() {
             ctx.font = "24px Arial";
             ctx.fillStyle = "#0095DD";
             ctx.fillText("Score: "+score, 10, canvas.height-16);
         }
         
+        // Écriture des vies
         function drawLives() {
             ctx.font = "24px Arial";
             ctx.fillStyle = "#0095DD";
             ctx.fillText("Balles: "+lives, canvas.width-100, canvas.height-16);
         }
         
+        // Écriture du compteur (avant que la partie commence)
         function drawCompteur() {
             var tailleCompteur = 200;
             ctx.font = tailleCompteur+"px Arial";
@@ -380,6 +389,7 @@
             ctx.fillText(compteur, canvas.width/2-tailleCompteur/4, canvas.height/2+tailleCompteur/4);
         }
         
+        // Dessin de la balle
         function drawBall() {
             ctx.beginPath();
             ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -425,6 +435,7 @@
             }
         }
         
+        // Dessin de la raquette
         function drawPaddle() {
             ctx.beginPath();
             ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
@@ -433,6 +444,7 @@
             ctx.closePath();
         }
 
+        // Dessin des briques
         var brickNumbers = [1, 2, 3, 9]
         var brickColors = ["#F0F005", "#FF8000", "#FF0000", "#1E1E1D"]
         function drawBricks() {
@@ -453,6 +465,7 @@
             }
         }
         
+        // Fonction de dessin principale
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBricks();
@@ -473,8 +486,9 @@
                 if(tempsDiffFeu >= 7500) {
                     balleFeu = false;
                 }
-            } 
-        
+            }
+            
+            /////////////////////////////////////////////////////////
             if(start == "left") {
                 dx = -dx;
                 start = "";
@@ -483,7 +497,8 @@
                 dx = dx;
                 start = "";
             }
-        
+            /////////////////////////////////////////////////////////            
+            
             if(jouer == true) {
                 x += dx;
                 y += dy;

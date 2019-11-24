@@ -1,4 +1,5 @@
 <?php
+session_start();
 // connexion à la base de données
 $db_username = 'root';
 $db_password = 'admindb';
