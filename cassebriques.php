@@ -228,6 +228,7 @@
                 direction = "right";
             }
             
+            // Déplacement de la raquette
             if(relativeX > 0 && relativeX < canvas.width) {
                 paddleX = relativeX - paddleWidth/2;
             }
@@ -461,7 +462,6 @@
         
         // Fonction de dessin principale
         function draw() {
-            console.log(direction);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBricks();
             if(powerup == true) {
@@ -487,13 +487,7 @@
                 }
             }
             
-            // Direction de départ de la balle
-            if(direction == "left") {
-                dx = -dx;
-            } 
-            else if(direction == "right") {
-                dx = dx;
-            }
+            
             
             if(start == true) {
                 x = paddleX + paddleWidth/2;
@@ -513,9 +507,17 @@
                     jouer = true;
                     compteur = "";
                     start = false;
+                    // Direction de départ de la balle
+                    if(direction == "left") {
+                        dx = -dx;
+                    } 
+                    else if(direction == "right") {
+                        dx = dx;
+                    }
                 }
             }
         
+            // Descente du powerup
             if(powerupFalling == true) {
                 powerupY += powerupDY;
             }
