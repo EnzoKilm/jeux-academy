@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<?php $page = 'index';?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,54 +18,10 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
-
-    <!-- Jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Import des éléments généraux du site -->
-    <script> 
-    $(function(){
-    $("#header").load("header.html"); 
-    $("#footer").load("footer.html"); 
-    });
-    </script>
 </head>
 
 <body>
-    
-    <div id="header"></div>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.php"><i class="fas fa-gamepad"></i> Jeux Academy</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php"><i class="fas fa-home"></i> Accueil</a>
-                </li>
-                <?php
-                session_start();
-                if(isset($_GET['deconnexion'])) { 
-                    if($_GET['deconnexion']==true) {  
-                        session_unset();
-                        header("location:index.php");
-                        }
-                }
-                else if(isset($_SESSION['pseudo'])) {
-                    echo "<li class='nav-item'><a class='nav-link' href='profil.php'><i class='fas fa-user'></i> Profil</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='index.php?deconnexion=true'><i class='fas fa-sign-out-alt'></i> Déconnexion</a></li>";
-                }
-                else {
-                    echo "<a class='nav-link' href='login.php'><i class='fas fa-sign-in-alt'></i> Connexion/inscription</a>";
-                }
-                ?>
-            </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include 'nav.php';?>
 
     <!-- Page Content -->
     <div class="container">
@@ -166,7 +122,7 @@
     <!-- /.container -->
 
     <!-- Footer -->
-    <div id="footer"></div>
+    <?php include 'footer.html';?>
     
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery.min.js"></script>
