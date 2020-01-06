@@ -245,6 +245,28 @@
             for(var c=0; c<brickColumnCount; c++) {
                 for(var r=0; r<brickRowCount; r++) {
                     var b = bricks[c][r];
+                    //////////////////////////////////////
+                    // REBONDS
+                    //////////////////////////////////////
+                    // Voir schéma paint pour plus d'explications
+                    //////////////
+                    // Si la balle tape le côté gauche (width : x) /////////&& si la balle tape le côté gauche (height : y)
+                    if(x+ballRadius >= b.x && x+ballRadius < b.x+brickWidth && y >= b.y && y+ballRadius <= b.y+brickHeight) {
+                        dx = -dx;
+                    }
+                    // Si la balle tape le côté droit (width : x) /////&& si la balle tape le côté droit (height : y)
+                    else if(x <= b.x+brickWidth && x >= b.x+brickWidth && y >= b.y && y+ballRadius <= b.y+brickHeight) {
+                        dx = - dx;
+                    }
+                    // Si la balle tape le dessus (width : x) ////////&& si la balle tape le dessus (height : y)
+                    else if(x >= b.x && x+ballRadius <= b.x+brickWidth && y+ballRadius == b.y) {
+                        dy = -dy;
+                    }
+                    // Si la balle tape le dessous (width : x) ////////&& si la balle tape le dessous (height : y)
+                    else if(x >= b.x && x+ballRadius <= b.x+brickWidth && y == b.y+brickHeight) {
+                        dy = -dy;
+                    }
+                    //////////////////////////////////////
                     if(b.status == 9) {
                         if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
                             dy = -dy;
