@@ -128,6 +128,7 @@
         var tempsDepartFeu = 0;
         var tempsFinFeu = 0;
         var start = true;
+        var relativeX = 0;
 
         brickTxt = brickTxt.replace(/(\r\n|\n|\r)/gm,"X");
 
@@ -205,9 +206,11 @@
         function keyUpHandler(e) {
             if(e.key == "Right" ||e.key == "ArrowRight" ||e.key == "d") {
                 rightPressed = false;
+                direction = "right"
             }
             else if(e.key == "Left" || e.key == "ArrowLeft" ||e.key == "q") {
                 leftPressed = false;
+                direction = "left";
             }
             else if(e.keyCode == 32) {
                 spaceBarPressed = false;
@@ -215,8 +218,10 @@
         }
         
         function mouseMoveHandler(e) {
-            var relativeX = e.clientX - canvas.offsetLeft;
-            if(relativeX < canvas.width/2) {
+            // Gestion de la position de la souris et comparaison avec l'ancienne position pour détecter si la raquette vas à gauche ou à droite
+            var oldRelativeX = relativeX;
+            relativeX = e.clientX - canvas.offsetLeft;
+            if(oldRelativeX > relativeX) {
                 direction = "left";
             }
             else {
@@ -230,7 +235,7 @@
                 paddleX = 0;
             }
             else if(relativeX > canvas.width) {
-                paddleX = canvas.width-paddleWidth;
+                paddleX = canvas.width - paddleWidth;
             }
         }
         
@@ -369,7 +374,7 @@
                 var tailleCompteur = 200;
                 ctx.fillText(compteur, canvas.width/2, canvas.height/2+tailleCompteur/4);
             }
-            else { // LA BARRE ESPACE FAIT DESCENDRE LA PAGE VERS LE BAS
+            else {
                 var texteCompteur = "Appuyez sur la barre espace pour commencer";
                 var tailleCompteur = 150;
                 ctx.fillText(texteCompteur, canvas.width/2-texteCompteur.length*5.5, canvas.height/2+tailleCompteur/4);
@@ -456,6 +461,7 @@
         
         // Fonction de dessin principale
         function draw() {
+            console.log(direction);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBricks();
             if(powerup == true) {
