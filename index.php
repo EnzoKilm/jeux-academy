@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <a href="cassebriques.php"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a>
+                        <p class="card-image-jeu"><a href="cassebriques.php"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="cassebriques.php">Casse briques</a>
@@ -83,7 +83,7 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <p class="card-image-jeu"><a href="#"><img class="card-img-top" src="images/wip.jpg" alt="Travaux"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a>
@@ -99,7 +99,7 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <p class="card-image-jeu"><a href="#"><img class="card-img-top" src="images/wip.jpg" alt="Travaux"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a>
