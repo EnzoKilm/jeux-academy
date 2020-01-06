@@ -23,6 +23,17 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Import des éléments généraux du site -->
+    <script> 
+    $(function(){
+    $("#header").load("header.html"); 
+    $("#footer").load("footer.html"); 
+    });
+    </script>
 </head>
 
 <body>
@@ -105,14 +116,9 @@
 
     </div>
     <!-- /.container -->
-
+    
     <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Jeux Academy 2019</p>
-        </div>
-    <!-- /.container -->
-    </footer>
+    <div id="footer"></div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery.min.js"></script>
@@ -131,13 +137,14 @@
         var ballStatus = "simple";
         var paddleHeight = 10;
         var paddleWidth = 75;
-        var x = canvas.width/2;
-        var y = canvas.height-10-Math.random()*70-paddleHeight-ballRadius;
+        var paddleX = (canvas.width-paddleWidth) / 2;
+        var x = paddleX + paddleWidth/2;
+        var y = canvas.height-2*paddleHeight;
         var doubleX = 0;
         var doubleY = 0;
-        var paddleX = (canvas.width-paddleWidth) / 2;
         var rightPressed = false;
         var leftPressed = false;
+        var spaceBarPressed = false;
         var brickRowCount = 9;
         var brickColumnCount = 11;
         var brickTxt = <?php 
@@ -164,6 +171,7 @@
         var balleFeu = false;
         var tempsDepartFeu = 0;
         var tempsFinFeu = 0;
+        var start = true;
 
         brickTxt = brickTxt.replace(/(\r\n|\n|\r)/gm,"X");
 
@@ -196,18 +204,17 @@
         }
 
         /////////////////////////////////////////////////////////
-        if(Math.round(Math.random()) == 0) {
-            var start = "left";
-        }
-        else {
-            var start = "right";
-        }
+        //if(Math.round(Math.random()) == 0) {
+        //    var start = "left";
+        //}
+        //else {
+        //    var start = "right";
+        //}
         /////////////////////////////////////////////////////////
         
         document.addEventListener("keydown", keyDownHandler, false);
         document.addEventListener("keyup", keyUpHandler, false);
         document.addEventListener("mousemove", mouseMoveHandler, false);
-        document.addEventListener("click", commencer, false);
         
         // Compteur du début de partie
         function commencer() {
@@ -228,6 +235,9 @@
             else if(e.key == "Left" || e.key == "ArrowLeft") {
                 leftPressed = true;
             }
+            else if(e.keyCode == 32) {
+                spaceBarPressed = true;
+            }
         }
         
         function keyUpHandler(e) {
@@ -236,6 +246,9 @@
             }
             else if(e.key == "Left" || e.key == "ArrowLeft") {
                 leftPressed = false;
+            }
+            else if(e.keyCode == 32) {
+                spaceBarPressed = false;
             }
         }
         
@@ -383,10 +396,17 @@
         
         // Écriture du compteur (avant que la partie commence)
         function drawCompteur() {
-            var tailleCompteur = 200;
-            ctx.font = tailleCompteur+"px Arial";
+            if(depart == true) {
+                var tailleCompteur = 200;
+                ctx.fillText(compteur, canvas.width/2-tailleCompteur/4, canvas.height/2+tailleCompteur/4);
+            }
+            else { // LA BARRE ESPACE FAIT DESCENDRE LA PAGE VERS LE BAS
+                var texteCompteur = "Appuyez sur la barre espace pour commencer";
+                var tailleCompteur = 150;
+                ctx.fillText(texteCompteur, canvas.width/2-texteCompteur.length*5.5, canvas.height/2+tailleCompteur/4);
+            }
             ctx.fillStyle = "#000000";
-            ctx.fillText(compteur, canvas.width/2-tailleCompteur/4, canvas.height/2+tailleCompteur/4);
+            ctx.font = tailleCompteur+"px Arial";
         }
         
         // Dessin de la balle
@@ -480,6 +500,10 @@
             collisionDetection();
             powerupActivation();
         
+            if(spaceBarPressed == true) {
+                commencer();
+            }
+            
             if(balleFeu == true) {
                 tempsFinFeu = new Date();
                 var tempsDiffFeu = tempsFinFeu - tempsDepartFeu;
@@ -489,15 +513,19 @@
             }
             
             /////////////////////////////////////////////////////////
-            if(start == "left") {
-                dx = -dx;
-                start = "";
-            } 
-            else if(start == "right") {
-                dx = dx;
-                start = "";
+            //if(start == "left") {
+            //    dx = -dx;
+            //    start = "";
+            //} 
+            //else if(start == "right") {
+            //    dx = dx;
+            //    start = "";
+            //}
+            /////////////////////////////////////////////////////////
+            if(start == true) {
+                x = paddleX + paddleWidth/2;
+                y = canvas.height-2*paddleHeight;
             }
-            /////////////////////////////////////////////////////////            
             
             if(jouer == true) {
                 x += dx;
@@ -511,6 +539,7 @@
                 if(compteur == 0) {
                     jouer = true;
                     compteur = "";
+                    start = false;
                 }
             }
         
@@ -547,6 +576,10 @@
                         dx = dx;
                         dy = -dy;
                         paddleX = (canvas.width-paddleWidth)/2;
+                        start = true;
+                        jouer = false;
+                        depart = false;
+                        commencer();
                     }
                 }
             }
