@@ -35,6 +35,9 @@
                         if($page == 'login') {
                             echo '<a class="nav-link active" href="login.php"><i class="fas fa-sign-in-alt"></i> Connexion/inscription</a>';
                         }
+                        else if($page == 'jeu') {
+                            header('Location: login.php');
+                        }
                         else {
                             echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-in-alt"></i> Connexion/inscription</a>';
                         }

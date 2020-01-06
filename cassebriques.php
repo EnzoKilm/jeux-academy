@@ -159,16 +159,16 @@
             }
         }
 
-        /////////////////////////////////////////////////////////
-        //if(Math.round(Math.random()) == 0) {
-        //    var start = "left";
-        //}
-        //else {
-        //    var start = "right";
-        //}
-        /////////////////////////////////////////////////////////
+        // Aléatoire pour le lancement de la balle si le joueur ne bouge pas la raquette
+        if(Math.round(Math.random()) == 0) {
+            var direction = "left";
+        }
+        else {
+            var direction = "right";
+        }
         
         document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
         document.addEventListener("keyup", keyUpHandler, false);
         document.addEventListener("mousemove", mouseMoveHandler, false);
         
@@ -185,11 +185,17 @@
         }
         
         function keyDownHandler(e) {
-            if(e.key == "Right" ||e.key == "ArrowRight") {
+            if(e.key == "Right" || e.key == "ArrowRight" ||e.key == "d") {
                 rightPressed = true;
+                if(depart == false) {
+                    direction = "right"
+                }
             }
-            else if(e.key == "Left" || e.key == "ArrowLeft") {
+            else if(e.key == "Left" || e.key == "ArrowLeft" ||e.key == "q") {
                 leftPressed = true;
+                if(depart == false) {
+                    direction = "left"
+                }
             }
             else if(e.keyCode == 32) {
                 spaceBarPressed = true;
@@ -197,10 +203,10 @@
         }
         
         function keyUpHandler(e) {
-            if(e.key == "Right" ||e.key == "ArrowRight") {
+            if(e.key == "Right" ||e.key == "ArrowRight" ||e.key == "d") {
                 rightPressed = false;
             }
-            else if(e.key == "Left" || e.key == "ArrowLeft") {
+            else if(e.key == "Left" || e.key == "ArrowLeft" ||e.key == "q") {
                 leftPressed = false;
             }
             else if(e.keyCode == 32) {
@@ -210,6 +216,13 @@
         
         function mouseMoveHandler(e) {
             var relativeX = e.clientX - canvas.offsetLeft;
+            if(relativeX < canvas.width/2) {
+                direction = "left";
+            }
+            else {
+                direction = "right";
+            }
+            
             if(relativeX > 0 && relativeX < canvas.width) {
                 paddleX = relativeX - paddleWidth/2;
             }
@@ -354,7 +367,7 @@
         function drawCompteur() {
             if(depart == true) {
                 var tailleCompteur = 200;
-                ctx.fillText(compteur, canvas.width/2-tailleCompteur/4, canvas.height/2+tailleCompteur/4);
+                ctx.fillText(compteur, canvas.width/2, canvas.height/2+tailleCompteur/4);
             }
             else { // LA BARRE ESPACE FAIT DESCENDRE LA PAGE VERS LE BAS
                 var texteCompteur = "Appuyez sur la barre espace pour commencer";
@@ -380,29 +393,29 @@
         
             if(ballStatus == "double") {
                 if(creationDeuxiemeBalle == true) {
-                doubleDx = -dx;
-                doubleDy = dy;
-                doubleBall = true;
-                var ecartX = Math.floor(Math.random() * (150 - 40 + 1)) + 10;
-                var ecartY = Math.floor(Math.random() * (130 - 40 + 1)) + 10;
-                if(x + ecartX >= canvas.width) {
-                    ecartX -= 2*ecartX;
-                    doubleX = x + ecartX;
+                    doubleDx = -dx;
+                    doubleDy = dy;
+                    doubleBall = true;
+                    var ecartX = Math.floor(Math.random() * (150 - 40 + 1)) + 10;
+                    var ecartY = Math.floor(Math.random() * (130 - 40 + 1)) + 10;
+                    if(x + ecartX >= canvas.width) {
+                        ecartX -= 2*ecartX;
+                        doubleX = x + ecartX;
+                    }
+                    else {
+                        ecartX += 2*ecartX;
+                        doubleX = x + ecartX;
+                    }
+                    if(y - ecartY <= canvas.height) {
+                        ecartY -= 2*ecartY;
+                        doubleY = y + ecartY;
+                    }
+                    else {
+                        ecartY += 2*ecartY;
+                        doubleY = y + ecartY;
+                    }
+                    creationDeuxiemeBalle = false;
                 }
-                else {
-                    ecartX += 2*ecartX;
-                    doubleX = x + ecartX;
-                }
-                if(y - ecartY <= canvas.height) {
-                    ecartY -= 2*ecartY;
-                    doubleY = y + ecartY;
-                }
-                else {
-                    ecartY += 2*ecartY;
-                    doubleY = y + ecartY;
-                }
-                creationDeuxiemeBalle = false;
-            }
                 ctx.beginPath();
                 ctx.arc(doubleX, doubleY, ballRadius, 0, Math.PI*2);
                 ctx.fillStyle = "#DF01D7";
@@ -468,16 +481,14 @@
                 }
             }
             
-            /////////////////////////////////////////////////////////
-            //if(start == "left") {
-            //    dx = -dx;
-            //    start = "";
-            //} 
-            //else if(start == "right") {
-            //    dx = dx;
-            //    start = "";
-            //}
-            /////////////////////////////////////////////////////////
+            // Direction de départ de la balle
+            if(direction == "left") {
+                dx = -dx;
+            } 
+            else if(direction == "right") {
+                dx = dx;
+            }
+            
             if(start == true) {
                 x = paddleX + paddleWidth/2;
                 y = canvas.height-2*paddleHeight;
@@ -570,11 +581,11 @@
         draw();
     </script>
     <script>
-    window.onkeydown = function(e) {
-    if (e.keyCode == 32 && e.target == document.body) {
-        e.preventDefault();
-    }
-    };
+        window.onkeydown = function(e) {
+        if (e.keyCode == 32 && e.target == document.body) {
+            e.preventDefault();
+        }
+        };
     </script>
 </body>
 

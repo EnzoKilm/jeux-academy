@@ -4,17 +4,19 @@
     <meta charset="utf-8" />
     <title>Casse Briques</title>
     <style>
-     * { padding: 0; margin: 0; }
-     canvas { background: url(images/fond_redi.jpg) no-repeat center center; display: block; margin: 0 auto; border-style: solid; }
-     button { display: block; margin: auto; }
-    </style>
+        * { padding: 0; margin: 0; }
+        canvas { background: #eee no-repeat center center; display: block; margin: 0 auto; border-style: solid; }
+        button { display: block; margin: auto; }
+       </style>
 </head>
 <body>
 
-<br/>
-<canvas id="myCanvas" width="960" height="640"></canvas><br/>
+<br/><canvas id="cassebriques" width="916" height="640"></canvas><br/>
 
-<script>var canvas = document.getElementById("myCanvas");
+<script>
+    // BALLE VA DANS BRIQUE INVINCIBLE
+    // !! REFAIRE LE SYSTÈME DE BOUNCE !!
+    var canvas = document.getElementById("cassebriques");
     var ctx = canvas.getContext("2d");
     var dx = 2.5;
     var dy = -5;
@@ -25,20 +27,23 @@
     var ballStatus = "simple";
     var paddleHeight = 10;
     var paddleWidth = 75;
-    var x = canvas.width/2;
-    var y = canvas.height-10-Math.random()*70-paddleHeight-ballRadius;
+    var paddleX = (canvas.width-paddleWidth) / 2;
+    var x = paddleX + paddleWidth/2;
+    var y = canvas.height-2*paddleHeight;
     var doubleX = 0;
     var doubleY = 0;
-    var paddleX = (canvas.width-paddleWidth) / 2;
     var rightPressed = false;
     var leftPressed = false;
+    var spaceBarPressed = false;
     var brickRowCount = 9;
     var brickColumnCount = 11;
-    var brickWidth = 75;
-    var brickHeight = 20;
+    var brickTxt = "00033933000\n01220002210\n11200000211\n00011111000\n00111011100\n00001110000\n00000000000\n00000000000\n00000000000";
+    var brickWidth = 80;
+    var brickHeight = 25;
     var brickPadding = 2;
-    var brickOffsetTop = 30;
-    var brickOffsetLeft = 30;
+    var brickOffsetTop = 8;
+    var brickOffsetLeft = 8;
+    var brickCount = 0;
     var score = 0;
     var jouer = false;
     var compteur = 3;
@@ -54,27 +59,44 @@
     var balleFeu = false;
     var tempsDepartFeu = 0;
     var tempsFinFeu = 0;
-    
+    var start = true;
+    var direction = "right";
+
+    brickTxt = brickTxt.replace(/(\r\n|\n|\r)/gm,"X");
+
+    var listeLigne = [];
+    var ligne = "";
+    for(var i = 0; i < brickTxt.length+1; i++) {
+        if(brickTxt[i] == "X") {
+            listeLigne.push(ligne);
+            ligne = "";
+        }
+        else {
+            ligne += brickTxt[i];
+        }
+    }
+    listeLigne.push(ligne);
+
     var bricks = [];
     for(var c=0; c<brickColumnCount; c++) {
         bricks[c] = [];
         for(var r=0; r<brickRowCount; r++) {
-            bricks[c][r] = { x: 0, y: 0, status: 1 };
+            for(var i=0; i<=9; i++) {
+                if(i == listeLigne[r][c]) {
+                    bricks[c][r] = { x: 0, y: 0, status: i };
+                    if(listeLigne[r][c] != 9) {
+                        brickCount += i;
+                    }
+                }
+            }
         }
-    }
-    
-    if(Math.round(Math.random()) == 0) {
-        var start = "left";
-    }
-    else {
-        var start = "right";
     }
     
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
     document.addEventListener("mousemove", mouseMoveHandler, false);
-    document.addEventListener("click", commencer, false);
     
+    // Compteur du début de partie
     function commencer() {
         if(jouer == false && depart == false) {
             depart = true;
@@ -89,18 +111,30 @@
     function keyDownHandler(e) {
         if(e.key == "Right" ||e.key == "ArrowRight") {
             rightPressed = true;
+            if(depart == false) {
+                direction = "right"
+            }
         }
         else if(e.key == "Left" || e.key == "ArrowLeft") {
             leftPressed = true;
+            if(depart == false) {
+                direction = "left"
+            }
+        }
+        else if(e.keyCode == 32) {
+            spaceBarPressed = true;
         }
     }
-    
+
     function keyUpHandler(e) {
         if(e.key == "Right" ||e.key == "ArrowRight") {
             rightPressed = false;
         }
         else if(e.key == "Left" || e.key == "ArrowLeft") {
             leftPressed = false;
+        }
+        else if(e.keyCode == 32) {
+            spaceBarPressed = false;
         }
     }
     
@@ -117,20 +151,34 @@
         }
     }
     
+    // Détection des collisions entre la balle et les briques
     function collisionDetection() {
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
                 var b = bricks[c][r];
-                if(b.status == 1) {
+                if(b.status == 9) {
+                    if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
+                        dy = -dy;
+                    }
+                    else if(doubleX+ballRadius > b.x && doubleX-ballRadius < b.x+brickWidth && doubleY+ballRadius > b.y && doubleY-ballRadius < b.y+brickHeight) {
+                        doubleDy = -doubleDy;
+                    }
+                }
+                else if(b.status >= 1 && b.status != 9) {
                     if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
                         if(balleFeu == false) {
                             dy = -dy;
+                            /*if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
+                                dy = -dy;
+                            }
+                            else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
+                                dx = -dx;
+                            }*/
                         }
-                        b.status = 0;
+                        b.status -= 1;
                         score++;
-                        if(score == brickRowCount*brickColumnCount) {
-                            alert("Bravo, vous avez gagné!");
-                            document.location.reload();
+                        if(score == brickCount) {
+                            window.location.replace("cassebriqueslvlup.php");
                         }
                         else {
                             if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
@@ -154,11 +202,10 @@
                     }
                     else if(doubleX+ballRadius > b.x && doubleX-ballRadius < b.x+brickWidth && doubleY+ballRadius > b.y && doubleY-ballRadius < b.y+brickHeight) {
                         doubleDy = -doubleDy;
-                        b.status = 0;
+                        b.status -= 1;
                         score++;
-                        if(score == brickRowCount*brickColumnCount) {
-                            alert("Bravo, vous avez gagné!");
-                            document.location.reload();
+                        if(score == brickCount) {
+                            window.location.replace("cassebriqueslvlup.php");
                         }
                     }
                 }
@@ -166,6 +213,7 @@
         }
     }
     
+    // Activation des powerups lorsqu'ils touchent la raquette
     function powerupActivation() {
         if(powerupX + powerupRadius/2 > paddleX && powerupX - powerupRadius/2 < paddleX + paddleWidth && powerupY + powerupRadius >= canvas.height - paddleHeight) {
             powerupStatus = 0;
@@ -191,6 +239,7 @@
         }
     }
     
+    // Création/dessin des powerups
     function drawPowerUp(type) {
         if(powerupStatus == 1) {
             if(type == "grandeRaquette") {
@@ -217,25 +266,36 @@
         }
     }
     
+    // Écriture du score
     function drawScore() {
-        ctx.font = "16px Arial";
+        ctx.font = "24px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Score: "+score, 8, 20);
+        ctx.fillText("Score: "+score, 10, canvas.height-16);
     }
     
+    // Écriture des vies
     function drawLives() {
-        ctx.font = "16px Arial";
+        ctx.font = "24px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Vies: "+lives, canvas.width-60, 20);
+        ctx.fillText("Balles: "+lives, canvas.width-100, canvas.height-16);
     }
     
+    // Écriture du compteur (avant que la partie commence)
     function drawCompteur() {
-        var tailleCompteur = 200;
+        if(depart == true) {
+            var tailleCompteur = 200;
+            ctx.fillText(compteur, canvas.width/2, canvas.height/2+tailleCompteur/4);
+        }
+        else { // LA BARRE ESPACE FAIT DESCENDRE LA PAGE VERS LE BAS
+            var texteCompteur = "Appuyez sur la barre espace pour commencer";
+            var tailleCompteur = 150;
+            ctx.fillText(texteCompteur, canvas.width/2-texteCompteur.length*5.5, canvas.height/2+tailleCompteur/4);
+        }
+        ctx.fillStyle = "#000000";
         ctx.font = tailleCompteur+"px Arial";
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillText(compteur, canvas.width/2-tailleCompteur/4, canvas.height/2+tailleCompteur/4);
     }
     
+    // Dessin de la balle
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -243,36 +303,36 @@
             ctx.fillStyle = "#FF6000";
         }
         else {
-            ctx.fillStyle = "#FFFFFF";
+            ctx.fillStyle = "#000000";
         }
         ctx.fill();
         ctx.closePath();
     
         if(ballStatus == "double") {
             if(creationDeuxiemeBalle == true) {
-            doubleDx = -dx;
-            doubleDy = dy;
-            doubleBall = true;
-            var ecartX = Math.floor(Math.random() * (150 - 40 + 1)) + 10;
-            var ecartY = Math.floor(Math.random() * (130 - 40 + 1)) + 10;
-            if(x + ecartX >= canvas.width) {
-                ecartX -= 2*ecartX;
-                doubleX = x + ecartX;
+                doubleDx = -dx;
+                doubleDy = dy;
+                doubleBall = true;
+                var ecartX = Math.floor(Math.random() * (150 - 40 + 1)) + 10;
+                var ecartY = Math.floor(Math.random() * (130 - 40 + 1)) + 10;
+                if(x + ecartX >= canvas.width) {
+                    ecartX -= 2*ecartX;
+                    doubleX = x + ecartX;
+                }
+                else {
+                    ecartX += 2*ecartX;
+                    doubleX = x + ecartX;
+                }
+                if(y - ecartY <= canvas.height) {
+                    ecartY -= 2*ecartY;
+                    doubleY = y + ecartY;
+                }
+                else {
+                    ecartY += 2*ecartY;
+                    doubleY = y + ecartY;
+                }
+                creationDeuxiemeBalle = false;
             }
-            else {
-                ecartX += 2*ecartX;
-                doubleX = x + ecartX;
-            }
-            if(y - ecartY <= canvas.height) {
-                ecartY -= 2*ecartY;
-                doubleY = y + ecartY;
-            }
-            else {
-                ecartY += 2*ecartY;
-                doubleY = y + ecartY;
-            }
-            creationDeuxiemeBalle = false;
-        }
             ctx.beginPath();
             ctx.arc(doubleX, doubleY, ballRadius, 0, Math.PI*2);
             ctx.fillStyle = "#DF01D7";
@@ -281,6 +341,7 @@
         }
     }
     
+    // Dessin de la raquette
     function drawPaddle() {
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
@@ -288,25 +349,29 @@
         ctx.fill();
         ctx.closePath();
     }
-    
+
+    // Dessin des briques
+    var brickNumbers = [1, 2, 3, 9]
+    var brickColors = ["#F0F005", "#FF8000", "#FF0000", "#1E1E1D"]
     function drawBricks() {
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
-                if(bricks[c][r].status == 1) {
+                if(brickNumbers.includes(bricks[c][r].status)) {
                     var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
                     var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
                     bricks[c][r].x = brickX;
                     bricks[c][r].y = brickY;
                     ctx.beginPath();
                     ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = "#0095DD";
+                    ctx.fillStyle = brickColors[brickNumbers.indexOf(bricks[c][r].status)];
                     ctx.fill();
                     ctx.closePath();
                 }
             }
         }
     }
-      
+    
+    // Fonction de dessin principale
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBricks();
@@ -321,23 +386,31 @@
         collisionDetection();
         powerupActivation();
     
+        if(spaceBarPressed == true) {
+            commencer();
+        }
+        
         if(balleFeu == true) {
             tempsFinFeu = new Date();
             var tempsDiffFeu = tempsFinFeu - tempsDepartFeu;
             if(tempsDiffFeu >= 7500) {
                 balleFeu = false;
             }
-        } 
-    
-        if(start == "left") {
-            dx = -dx;
-            start = "";
-        } 
-        else if(start == "right") {
-            dx = dx;
-            start = "";
         }
-    
+        
+        // Direction de départ de la balle
+        if(direction == "left") {
+            dx = -dx;
+        } 
+        else if(direction == "right") {
+            dx = dx;
+        }
+        
+        if(start == true) {
+            x = paddleX + paddleWidth/2;
+            y = canvas.height-2*paddleHeight;
+        }
+        
         if(jouer == true) {
             x += dx;
             y += dy;
@@ -350,6 +423,7 @@
             if(compteur == 0) {
                 jouer = true;
                 compteur = "";
+                start = false;
             }
         }
     
@@ -357,16 +431,20 @@
             powerupY += powerupDY;
         }
         
+        // Si la balle sort de l'écran (largeur)
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
             dx = -dx;
         }
         else if(doubleX + dx > canvas.width-ballRadius || doubleX + doubleDx < ballRadius) {
             doubleDx = -doubleDx;
         }
-    
+        
+        // Si la balle sort de l'écran 
         if(y + dy < ballRadius) {
             dy = -dy;
-        } else if(y + dy + ballRadius/2 > canvas.height - paddleHeight) {
+        }
+        // Si la balle sort de l'écran (longueur)
+        else if(y + dy + ballRadius/2 > canvas.height - paddleHeight) {
             if(x > paddleX - ballRadius/2 && x < paddleX + paddleWidth + ballRadius) {
                 dy = -dy;
             }   
@@ -382,12 +460,17 @@
                     dx = dx;
                     dy = -dy;
                     paddleX = (canvas.width-paddleWidth)/2;
+                    start = true;
+                    jouer = false;
+                    depart = false;
+                    commencer();
                 }
             }
         }
         if(doubleY + doubleDy < ballRadius) {
             doubleDy = -doubleDy;
-        } else if(doubleY + doubleDy + ballRadius/2 > canvas.height - paddleHeight) {
+        }
+        else if(doubleY + doubleDy + ballRadius/2 > canvas.height - paddleHeight) {
             if(doubleX > paddleX - ballRadius/2 && doubleX < paddleX + paddleWidth + ballRadius) {
                 doubleDy = -doubleDy;
             }   
@@ -412,7 +495,8 @@
         requestAnimationFrame(draw);
     }
     
-    draw();</script>
+    draw();
+</script>
 
 </body>
 </html>
