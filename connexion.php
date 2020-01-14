@@ -23,7 +23,12 @@ if(isset($_POST['pseudo']) && isset($_POST['mdp'])) {
    // nom d'utilisateur et mot de passe correctes
    if($count!=0) {
       $_SESSION['pseudo'] = $pseudo;
-      header('Location: index.php');
+      if(isset($_SESSION['jeu_url'])) {
+         header('Location: '. $_SESSION['jeu_url']);
+      }
+      else {
+         header('Location: index.php');
+      }
    }
    else {
       header('Location: login.php?erreur=1'); // utilisateur ou mot de passe incorrect

@@ -242,88 +242,97 @@
         
         // Détection des collisions entre la balle et les briques
         function collisionDetection() {
-            for(var c=0; c<brickColumnCount; c++) {
-                for(var r=0; r<brickRowCount; r++) {
-                    var b = bricks[c][r];
-                    //////////////////////////////////////
-                    // REBONDS
-                    //////////////////////////////////////
-                    // Voir schéma paint pour plus d'explications
-                    //////////////
-                    // Si la balle tape le côté gauche (width : x) /////////&& si la balle tape le côté gauche (height : y)
-                    if(x+ballRadius >= b.x && x+ballRadius < b.x+brickWidth && y >= b.y && y+ballRadius <= b.y+brickHeight) {
+        for(var c=0; c<brickColumnCount; c++) {
+            for(var r=0; r<brickRowCount; r++) {
+                var b = bricks[c][r];
+                if(b.status == 9) {
+                    // if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
+                    //     dy = -dy;
+                    // }
+                    if(x+ballRadius/2 > b.x && x-ballRadius/2 < b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
+                        dy = -dy;
+                    }
+                    else if(doubleX+ballRadius/2 > b.x && doubleX-ballRadius/2 < b.x+brickWidth && doubleY+ballRadius/2 > b.y && doubleY-ballRadius/2 < b.y+brickHeight) {
+                        doubleDy = -doubleDy;
+                    }
+                }
+                else if(b.status >= 1 && b.status != 9) {
+                    // if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
+                    //     if(balleFeu == false) {
+                    //         dy = -dy;
+                    //         /*if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
+                    //             dy = -dy;
+                    //         }
+                    //         else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
+                    //             dx = -dx;
+                    //         }*/
+                    //     }
+                    //     b.status -= 1;
+                    //     score++;
+                    //     if(score == brickCount) {
+                    //         window.location.replace("cassebriqueslvlup.php");
+                    //     }
+                    //     else {
+                    //         if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
+                    //             powerupAleatoire = Math.floor(Math.random() * 3);
+                    //             powerup = true;
+                    //             powerupStatus = 1;
+                    //             powerupX = b.x+brickWidth/2
+                    //             powerupY = b.y+powerupRadius/2;
+                    //             powerupFalling = true;
+                    //             if(powerupAleatoire == 1 && doubleBall == false) {
+                    //                 powerupType = "doubleBalle";
+                    //             }
+                    //             else if(powerupAleatoire == 2 && balleFeu == false) {
+                    //                 powerupType = "balleFeu"
+                    //             }
+                    //             else {
+                    //                 powerupType = "grandeRaquette"
+                    //             }
+                    //         } 
+                    //     }
+                    // }
+
+                    // A gauche
+                    if(y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight && x+ballRadius >= b.x && dx > 0) {
                         dx = -dx;
+                        b.status -= 1;
+                        console.log("Gauche");
                     }
-                    // Si la balle tape le côté droit (width : x) /////&& si la balle tape le côté droit (height : y)
-                    else if(x <= b.x+brickWidth && x >= b.x+brickWidth && y >= b.y && y+ballRadius <= b.y+brickHeight) {
-                        dx = - dx;
+                    // A droite
+                    if(y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight && x <= b.x+brickWidth && x+ballRadius >= b.x+brickWidth && dx < 0) {
+                        dx = -dx;
+                        b.status -= 1;
+                        console.log("Droite");
                     }
-                    // Si la balle tape le dessus (width : x) ////////&& si la balle tape le dessus (height : y)
-                    else if(x >= b.x && x+ballRadius <= b.x+brickWidth && y+ballRadius == b.y) {
+                    // En haut ou en bas
+                    else if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius >= b.y && y-ballRadius <= b.y+brickHeight) {
                         dy = -dy;
+                        b.status -= 1;
+                        console.log("Haut/bas");
                     }
-                    // Si la balle tape le dessous (width : x) ////////&& si la balle tape le dessous (height : y)
-                    else if(x >= b.x && x+ballRadius <= b.x+brickWidth && y == b.y+brickHeight) {
-                        dy = -dy;
-                    }
-                    //////////////////////////////////////
-                    if(b.status == 9) {
-                        if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
-                            dy = -dy;
-                        }
-                        else if(doubleX+ballRadius > b.x && doubleX-ballRadius < b.x+brickWidth && doubleY+ballRadius > b.y && doubleY-ballRadius < b.y+brickHeight) {
-                            doubleDy = -doubleDy;
-                        }
-                    }
-                    else if(b.status >= 1 && b.status != 9) {
-                        if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
-                            if(balleFeu == false) {
-                                dy = -dy;
-                                /*if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
-                                    dy = -dy;
-                                }
-                                else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
-                                    dx = -dx;
-                                }*/
-                            }
-                            b.status -= 1;
-                            score++;
-                            if(score == brickCount) {
-                                window.location.replace("cassebriqueslvlup.php");
-                            }
-                            else {
-                                if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
-                                    powerupAleatoire = Math.floor(Math.random() * 3);
-                                    powerup = true;
-                                    powerupStatus = 1;
-                                    powerupX = b.x+brickWidth/2
-                                    powerupY = b.y+powerupRadius/2;
-                                    powerupFalling = true;
-                                    if(powerupAleatoire == 1 && doubleBall == false) {
-                                        powerupType = "doubleBalle";
-                                    }
-                                    else if(powerupAleatoire == 2 && balleFeu == false) {
-                                        powerupType = "balleFeu"
-                                    }
-                                    else {
-                                        powerupType = "grandeRaquette"
-                                    }
-                                } 
-                            }
-                        }
-                        else if(doubleX+ballRadius > b.x && doubleX-ballRadius < b.x+brickWidth && doubleY+ballRadius > b.y && doubleY-ballRadius < b.y+brickHeight) {
-                            doubleDy = -doubleDy;
-                            b.status -= 1;
-                            score++;
-                            if(score == brickCount) {
-                                window.location.replace("cassebriqueslvlup.php");
-                            }
+                    // A gauche ou a droite
+                    // else if() {
+                    //     dx = -dx;
+                    //     b.status -= 1;
+                    //     console.log("Gauche/droite");
+                    // }
+
+
+
+                    else if(doubleX+ballRadius/2 > b.x && doubleX-ballRadius/2 < b.x+brickWidth && doubleY+ballRadius/2 > b.y && doubleY-ballRadius/2 < b.y+brickHeight) {
+                        doubleDy = -doubleDy;
+                        b.status -= 1;
+                        score++;
+                        if(score == brickCount) {
+                            window.location.replace("cassebriqueslvlup.php");
                         }
                     }
                 }
             }
         }
-        
+    }
+    
         // Activation des powerups lorsqu'ils touchent la raquette
         function powerupActivation() {
             if(powerupX + powerupRadius/2 > paddleX && powerupX - powerupRadius/2 < paddleX + paddleWidth && powerupY + powerupRadius >= canvas.height - paddleHeight) {

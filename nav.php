@@ -36,6 +36,7 @@
                             echo '<a class="nav-link active" href="login.php"><i class="fas fa-sign-in-alt"></i> Connexion/inscription</a>';
                         }
                         else if($page == 'jeu') {
+                            $_SESSION['jeu_url'] = $_SERVER['REQUEST_URI'];
                             header('Location: login.php');
                         }
                         else {
