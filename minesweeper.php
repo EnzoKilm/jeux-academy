@@ -70,35 +70,29 @@
         <!-- /.row -->
         
         <!-- <br/><canvas id="cassebriques" width="916" height="640"></canvas><br/> -->
-        <br/><div class="jeu">
+        <br/>
+        <div class="jeu">
             <div class="minesweeper">
-                <div class="game" id="plateau">
-
-
-                </div>
+                <div id="left" class="result"></div>
+                <div class="game" id="plateau"></div>
+                <div id="right" class="result"></div>
+                
                 <div class="options">
-
-                    <div id="result" class="result">
-
-                    </div>
-
                     <div class="menus">
                         <div class="menu" onclick="MineSweeper.startGame('easy');">
-                            Jouer "Facile"
+                            <p>Niveau facile</p>
                         </div>
                         <div class="menu" onclick="MineSweeper.startGame('normal');">
-                            Jouer "Normal"
+                            <p>Niveau normal</p>
                         </div>
                         <div class="menu" onclick="MineSweeper.startGame('hard');">
-                            Jouer "Difficile"
-                        </div>
-                        <div class="menu" onclick="MineSweeper.startGame('extreme');">
-                            Jouer "Extr&ecirc;me"
+                            <p>Niveau difficile</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div><br/>
+        </div>
+        <br/>
         
 
     </div>

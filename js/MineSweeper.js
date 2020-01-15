@@ -5,22 +5,17 @@ var MineSweeper = {
         easy: {
             lines: 8,
             columns: 8,
-            mines: 10,
+            mines: 8,
         },
         normal: {
             lines: 12,
             columns: 12,
-            mines: 20,
+            mines: 16,
         },
         hard: {
             lines: 16,
             columns: 16,
             mines: 32,
-        },
-        extreme: {
-            lines: 20,
-            columns: 20,
-            mines: 48,
         },
     },
 
@@ -48,7 +43,11 @@ var MineSweeper = {
         board = document.getElementById('plateau');
         board.innerHTML = '';
 
-        document.getElementById('result').innerHTML = '';
+        var elements = document.getElementsByClassName("result");
+        for (var i = 0, len = elements.length; i < len; i++) {
+            elements[i].innerHTML = '';
+            elements[i].style.backgroundColor = '#eeeeee';
+        }
 
         border = document.createElement('table');
         border.setAttribute('oncontextmenu', 'return false;');
@@ -131,6 +130,7 @@ var MineSweeper = {
         /* Verifie si la cellule est une mine */
         if (this.game.field[x][y] == -1) {
             document.getElementById('cell-'+x+'-'+y).className = 'cell bomb';
+            document.getElementById('cell-'+x+'-'+y).innerHTML = '&#128163';
             this.displayLose();
             return;
         }
@@ -185,7 +185,7 @@ var MineSweeper = {
         } else {
             /* Applique le marquage */
             document.getElementById('cell-'+x+'-'+y).className = 'cell marked';
-            document.getElementById('cell-'+x+'-'+y).innerHTML = '!';
+            document.getElementById('cell-'+x+'-'+y).innerHTML = '&#127988';
             this.game.field[x][y] -= 100;
         }
     },
@@ -206,8 +206,12 @@ var MineSweeper = {
 
     displayWin: function() {
         /* Affiche le resultat dans l'espace dedie, en couleur */
-        document.getElementById('result').innerHTML = 'Gagn&eacute;';
-        document.getElementById('result').style.color = '#43b456';
+        var elements = document.getElementsByClassName("result");
+        for (var i = 0, len = elements.length; i < len; i++) {
+            elements[i].innerHTML = '<p>Gagn&eacute;</p>';
+            elements[i].style.color = '#43b456';
+            elements[i].style.backgroundColor = '#55ce3d60';
+        }
 
         /* Defini l'etat de la partie a termine */
         this.game.status = 0;
@@ -215,8 +219,12 @@ var MineSweeper = {
 
     displayLose: function() {
         /* Affiche le resultat dans l'espace dedie, en couleur */
-        document.getElementById('result').innerHTML = 'Perdu';
-        document.getElementById('result').style.color = '#CC3333';
+        var elements = document.getElementsByClassName("result");
+        for (var i = 0, len = elements.length; i < len; i++) {
+            elements[i].innerHTML = '<p>Perdu</p>';
+            elements[i].style.color = '#CC3333';
+            elements[i].style.backgroundColor = '#d12d2d60';
+        }
 
         /* Defini l'etat de la partie a termine */
         this.game.status = 0;
