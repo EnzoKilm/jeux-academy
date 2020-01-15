@@ -113,7 +113,6 @@ var MineSweeper = {
     },
 
     checkPosition: function(x, y, check) {
-
         /* Verifie si le jeu est en fonctionnement */
         if (this.game.status != 1)
             return;
@@ -132,6 +131,14 @@ var MineSweeper = {
         if (this.game.field[x][y] == -1) {
             document.getElementById('cell-'+x+'-'+y).className = 'cell bomb';
             document.getElementById('cell-'+x+'-'+y).innerHTML = '&#128163';
+            /* On fait apparaître toutes les bombes */
+            for (i = 1; i <= this.settings['lines']; i++) {
+                for (j = 1; j <= this.settings['columns']; j++) {
+                    if (this.game.field[i][j] == -1) {
+                        document.getElementById('cell-'+i+'-'+j).innerHTML = '&#128163';
+                    }
+                }
+            }
             this.displayLose();
             return;
         }
