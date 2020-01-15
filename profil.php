@@ -159,8 +159,41 @@
             
             <div class="col-lg-3">
                 <?php
-                $user = $_SESSION['pseudo'];
-                echo "<h1 class='my-4'>$user</h1>";
+                // On récupère l'id souhaité
+                $id = $_REQUEST['id'];
+                // Connexion à la bage de données
+                $db_username = 'root';
+                $db_password = 'admindb';
+                $db_name     = 'jeux-academy';
+                $db_host     = 'localhost';
+                $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
+                        or die('Connexion à la base de données impossible.');
+                if ($_SESSION['id'] == $_REQUEST['id']) {
+                    // On récupère le propre id de l'utilisateur
+                    $id = $_SESSION['id'];
+                    $requete = "SELECT pseudo FROM users where id = '".$id."'";
+                    // On récupère la requête
+                    $exec_requete = mysqli_query($db,$requete);
+                    $reponse      = mysqli_fetch_array($exec_requete);
+                    $pseudo = $reponse[0];
+                    echo "<h1 class='my-4'>$pseudo</h1>";
+                } else {
+                    $requete = "SELECT count(*) FROM users";
+                    $exec_requete = mysqli_query($db,$requete);
+                    $reponse      = mysqli_fetch_array($exec_requete);
+                    $nombre_id = $reponse['count(*)'];
+                    // Si il existe
+                    if ($_REQUEST['id'] <= $nombre_id && $_REQUEST['id'] > 0) {
+                        $requete = "SELECT pseudo FROM users where id = '".$id."'";
+                        // On récupère la requête
+                        $exec_requete = mysqli_query($db,$requete);
+                        $reponse      = mysqli_fetch_array($exec_requete);
+                        $pseudo = $reponse[0];
+                        echo "<h1 class='my-4'>$pseudo</h1>";
+                    } else {
+                        header("location:404.php");
+                    }
+                }
                 ?>
                 <img src="images/profil.png" alt="Profil" id="profil">
                 <div class="list-group">

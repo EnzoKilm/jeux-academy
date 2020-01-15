@@ -22,6 +22,12 @@ if(isset($_POST['pseudo']) && isset($_POST['mdp'])) {
    $count = $reponse['count(*)'];
    // nom d'utilisateur et mot de passe correctes
    if($count!=0) {
+      // On fait la requête
+      $requete = "SELECT id FROM users where pseudo = '".$pseudo."'";
+      // On récupère la réponse
+      $exec_requete = mysqli_query($db,$requete);
+      $reponse      = mysqli_fetch_array($exec_requete);
+      $_SESSION['id'] = $reponse[0];
       $_SESSION['pseudo'] = $pseudo;
       if(isset($_SESSION['jeu_url'])) {
          header('Location: '. $_SESSION['jeu_url']);

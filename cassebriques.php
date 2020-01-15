@@ -32,38 +32,38 @@
     <div class="container">
         <div class="row">
             <?php
-            // connexion à la base de données
-            $db_username = 'root';
-            $db_password = 'admindb';
-            $db_name     = 'jeux-academy';
-            $db_host     = 'localhost';
-            $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
-                    or die('Connexion à la base de données impossible.');
+                // connexion à la base de données
+                $db_username = 'root';
+                $db_password = 'admindb';
+                $db_name     = 'jeux-academy';
+                $db_host     = 'localhost';
+                $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
+                        or die('Connexion à la base de données impossible.');
 
-            // On récupère l'id du joueur
-            $sql = "SELECT id FROM users where pseudo = '".$_SESSION['pseudo']."'";
-            $result = mysqli_query($db,$sql);
-            $value = mysqli_fetch_array($result);
-            $id = $value[0];
+                // On récupère l'id du joueur
+                $sql = "SELECT id FROM users where pseudo = '".$_SESSION['pseudo']."'";
+                $result = mysqli_query($db,$sql);
+                $value = mysqli_fetch_array($result);
+                $id = $value[0];
 
-            // On regarde le niveau du joueur
-            $requete = "SELECT niveau FROM casse_briques_users where id_joueur = '".$id."'";
-            $exec_requete = mysqli_query($db,$requete);
-            $reponse = mysqli_fetch_array($exec_requete);
-            $niveau = $reponse[0];
+                // On regarde le niveau du joueur
+                $requete = "SELECT niveau FROM casse_briques_users where id_joueur = '".$id."'";
+                $exec_requete = mysqli_query($db,$requete);
+                $reponse = mysqli_fetch_array($exec_requete);
+                $niveau = $reponse[0];
 
-            // Si le joueur n'a pas encore joué au jeu
-            if(isset($resultat)) {
-                // On ajoute ses infos dans la table du jeu dans la db
-                $requete = "INSERT INTO casse_briques_users(id_joueur,niveau) VALUES ('".$id."',1)";
-            }
-            
-            $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$niveau."'";
-            $result = mysqli_query($db,$requete);
-            $value = mysqli_fetch_array($result);
-            $map = $value[0];
+                // Si le joueur n'a pas encore joué au jeu
+                if(isset($resultat)) {
+                    // On ajoute ses infos dans la table du jeu dans la db
+                    $requete = "INSERT INTO casse_briques_users(id_joueur,niveau) VALUES ('".$id."',1)";
+                }
+                
+                $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$niveau."'";
+                $result = mysqli_query($db,$requete);
+                $value = mysqli_fetch_array($result);
+                $map = $value[0];
 
-            mysqli_close($db); // fermer la connexion            
+                mysqli_close($db); // fermer la connexion            
             ?>
         </div>
         <!-- /.row -->
@@ -250,98 +250,97 @@
         
         // Détection des collisions entre la balle et les briques
         function collisionDetection() {
-        for(var c=0; c<brickColumnCount; c++) {
-            for(var r=0; r<brickRowCount; r++) {
-                var b = bricks[c][r];
-                if(b.status == 9) {
-                    // if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
-                    //     dy = -dy;
-                    // }
-                    if(x+ballRadius/2 > b.x && x-ballRadius/2 < b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
-                        dy = -dy;
-                    }
-                    else if(doubleX+ballRadius/2 > b.x && doubleX-ballRadius/2 < b.x+brickWidth && doubleY+ballRadius/2 > b.y && doubleY-ballRadius/2 < b.y+brickHeight) {
-                        doubleDy = -doubleDy;
-                    }
-                }
-                else if(b.status >= 1 && b.status != 9) {
-                    /*if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
-                        if(balleFeu == false) {
+            for(var c=0; c<brickColumnCount; c++) {
+                for(var r=0; r<brickRowCount; r++) {
+                    var b = bricks[c][r];
+                    if(b.status == 9) {
+                        // if(x+ballRadius > b.x && x-ballRadius < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
+                        //     dy = -dy;
+                        // }
+                        if(x+ballRadius/2 > b.x && x-ballRadius/2 < b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
                             dy = -dy;
-                            if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
+                        }
+                        else if(doubleX+ballRadius/2 > b.x && doubleX-ballRadius/2 < b.x+brickWidth && doubleY+ballRadius/2 > b.y && doubleY-ballRadius/2 < b.y+brickHeight) {
+                            doubleDy = -doubleDy;
+                        }
+                    }
+                    else if(b.status >= 1 && b.status != 9) {
+                        /*if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
+                            if(balleFeu == false) {
                                 dy = -dy;
+                                if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
+                                    dy = -dy;
+                                }
+                                else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
+                                    dx = -dx;
+                                }
                             }
-                            else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
-                                dx = -dx;
+                            b.status -= 1;
+                            score++;
+                            if(score == brickCount) {
+                                window.location.replace("cassebriqueslvlup.php");
                             }
+                            else {
+                                if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
+                                    powerupAleatoire = Math.floor(Math.random() * 3);
+                                    powerup = true;
+                                    powerupStatus = 1;
+                                    powerupX = b.x+brickWidth/2
+                                    powerupY = b.y+powerupRadius/2;
+                                    powerupFalling = true;
+                                    if(powerupAleatoire == 1 && doubleBall == false) {
+                                        powerupType = "doubleBalle";
+                                    }
+                                    else if(powerupAleatoire == 2 && balleFeu == false) {
+                                        powerupType = "balleFeu"
+                                    }
+                                    else {
+                                        powerupType = "grandeRaquette"
+                                    }
+                                } 
+                            }
+                        }*/
+
+                        // A gauche
+                        if(x+ballRadius >= b.x && x+ballRadius < b.x+brickWidth && y >= b.y && y+ballRadius <= b.y+brickHeight) {
+                            dx = -dx;
+                            b.status -= 1;
+                            console.log("Gauche");
                         }
-                        b.status -= 1;
-                        score++;
-                        if(score == brickCount) {
-                            window.location.replace("cassebriqueslvlup.php");
+                        // A droite
+                        else if(x <= b.x+brickWidth && x > b.x && y >= b.y && y+ballRadius <= b.y+brickHeight) {
+                            dx = -dx;
+                            b.status -= 1;
+                            console.log("Droite");
                         }
-                        else {
-                            if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
-                                powerupAleatoire = Math.floor(Math.random() * 3);
-                                powerup = true;
-                                powerupStatus = 1;
-                                powerupX = b.x+brickWidth/2
-                                powerupY = b.y+powerupRadius/2;
-                                powerupFalling = true;
-                                if(powerupAleatoire == 1 && doubleBall == false) {
-                                    powerupType = "doubleBalle";
-                                }
-                                else if(powerupAleatoire == 2 && balleFeu == false) {
-                                    powerupType = "balleFeu"
-                                }
-                                else {
-                                    powerupType = "grandeRaquette"
-                                }
-                            } 
+                        // En haut ou en bas
+                        else if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius >= b.y && y-ballRadius <= b.y+brickHeight) {
+                            dy = -dy;
+                            b.status -= 1;
+                            console.log("Haut/bas");
                         }
-                    }*/
-
-                    // A gauche
-                    if(x+ballRadius >= b.x && x+ballRadius < b.x+brickWidth && y >= b.y && y+ballRadius <= b.y+brickHeight) {
-                        dx = -dx;
-                        b.status -= 1;
-                        console.log("Gauche");
-                    }
-                    console.log(x, b.x+brickWidth)
-                    // A droite
-                    else if(x <= b.x+brickWidth && x > b.x && y >= b.y && y+ballRadius <= b.y+brickHeight) {
-                        dx = -dx;
-                        b.status -= 1;
-                        console.log("Droite");
-                    }
-                    // En haut ou en bas
-                    else if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius >= b.y && y-ballRadius <= b.y+brickHeight) {
-                        dy = -dy;
-                        b.status -= 1;
-                        console.log("Haut/bas");
-                    }
-                    // else 
-                    // A gauche ou a droite
-                    // else if() {
-                    //     dx = -dx;
-                    //     b.status -= 1;
-                    //     console.log("Gauche/droite");
-                    // }*/
+                        // else 
+                        // A gauche ou a droite
+                        // else if() {
+                        //     dx = -dx;
+                        //     b.status -= 1;
+                        //     console.log("Gauche/droite");
+                        // }*/
 
 
 
-                    else if(doubleX+ballRadius/2 > b.x && doubleX-ballRadius/2 < b.x+brickWidth && doubleY+ballRadius/2 > b.y && doubleY-ballRadius/2 < b.y+brickHeight) {
-                        doubleDy = -doubleDy;
-                        b.status -= 1;
-                        score++;
-                        if(score == brickCount) {
-                            window.location.replace("cassebriqueslvlup.php");
+                        else if(doubleX+ballRadius/2 > b.x && doubleX-ballRadius/2 < b.x+brickWidth && doubleY+ballRadius/2 > b.y && doubleY-ballRadius/2 < b.y+brickHeight) {
+                            doubleDy = -doubleDy;
+                            b.status -= 1;
+                            score++;
+                            if(score == brickCount) {
+                                window.location.replace("cassebriqueslvlup.php");
+                            }
                         }
                     }
                 }
             }
         }
-    }
     
         // Activation des powerups lorsqu'ils touchent la raquette
         function powerupActivation() {

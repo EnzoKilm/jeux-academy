@@ -23,10 +23,10 @@
                     }
                     else if(isset($_SESSION['pseudo'])) {
                         if($page == 'profil') {
-                            echo '<li class="nav-item"><a class="nav-link active" href="profil.php"><i class="fas fa-user"></i> Profil</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link active" href="profil.php?id='.$_SESSION['id'].'"><i class="fas fa-user"></i> Profil</a></li>';
                         }
                         else {
-                            echo '<li class="nav-item"><a class="nav-link" href="profil.php"><i class="fas fa-user"></i> Profil</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="profil.php?id='.$_SESSION['id'].'"><i class="fas fa-user"></i> Profil</a></li>';
                         }
                         
                         echo '<li class="nav-item"><a class="nav-link" href="index.php?deconnexion=true"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>';
