@@ -43,10 +43,11 @@ var MineSweeper = {
         board = document.getElementById('plateau');
         board.innerHTML = '';
 
-        var elements = document.getElementsByClassName("result");
+        var elements = document.getElementsByClassName('result');
         for (var i = 0, len = elements.length; i < len; i++) {
             elements[i].innerHTML = '';
             elements[i].style.backgroundColor = '#eeeeee';
+            elements[i].style.borderWidth = '0';
         }
 
         border = document.createElement('table');
@@ -206,12 +207,16 @@ var MineSweeper = {
 
     displayWin: function() {
         /* Affiche le resultat dans l'espace dedie, en couleur */
-        var elements = document.getElementsByClassName("result");
-        for (var i = 0, len = elements.length; i < len; i++) {
-            elements[i].innerHTML = '<p>Gagn&eacute;</p>';
-            elements[i].style.color = '#43b456';
-            elements[i].style.backgroundColor = '#55ce3d60';
-        }
+        var left = document.getElementById('left');
+        left.innerHTML = '<p>Gagn&eacute;</p>';
+        left.style.color = '#43b456';
+        left.style.backgroundColor = '#55ce3d60';
+        left.style.borderWidth = '0 2px 0 0';
+        var right = document.getElementById('right');
+        right.innerHTML = '<p>Gagn&eacute;</p>';
+        right.style.color = '#43b456';
+        right.style.backgroundColor = '#55ce3d60';
+        right.style.borderWidth = '0 0 0 2px';
 
         /* Defini l'etat de la partie a termine */
         this.game.status = 0;
@@ -219,12 +224,16 @@ var MineSweeper = {
 
     displayLose: function() {
         /* Affiche le resultat dans l'espace dedie, en couleur */
-        var elements = document.getElementsByClassName("result");
-        for (var i = 0, len = elements.length; i < len; i++) {
-            elements[i].innerHTML = '<p>Perdu</p>';
-            elements[i].style.color = '#CC3333';
-            elements[i].style.backgroundColor = '#d12d2d60';
-        }
+        var left = document.getElementById('left');
+        left.innerHTML = '<p>Perdu</p>';
+        left.style.color = '#CC3333';
+        left.style.backgroundColor = '#d12d2d60';
+        left.style.borderWidth = '0 2px 0 0';
+        var right = document.getElementById('right');
+        right.innerHTML = '<p>Perdu</p>';
+        right.style.color = '#CC3333';
+        right.style.backgroundColor = '#d12d2d60';
+        right.style.borderWidth = '0 0 0 2px';
 
         /* Defini l'etat de la partie a termine */
         this.game.status = 0;
