@@ -230,13 +230,21 @@
             
             // Déplacement de la raquette
             if(relativeX > 0 && relativeX < canvas.width) {
-                paddleX = relativeX - paddleWidth/2;
+                paddleX = relativeX-paddleWidth/2;
             }
             else if(relativeX < 0) {
                 paddleX = 0;
             }
             else if(relativeX > canvas.width) {
-                paddleX = canvas.width - paddleWidth;
+                paddleX = canvas.width-paddleWidth;
+            }
+
+            // Pour ne pas que la raquette dépasse de l'écran quand le curseur est au bord
+            if(relativeX > canvas.width-paddleWidth/2) {
+                paddleX = canvas.width-paddleWidth;
+            }
+            else if(relativeX < 0+paddleWidth/2) {
+                paddleX = 0;
             }
         }
         
@@ -257,50 +265,51 @@
                     }
                 }
                 else if(b.status >= 1 && b.status != 9) {
-                    // if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
-                    //     if(balleFeu == false) {
-                    //         dy = -dy;
-                    //         /*if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
-                    //             dy = -dy;
-                    //         }
-                    //         else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
-                    //             dx = -dx;
-                    //         }*/
-                    //     }
-                    //     b.status -= 1;
-                    //     score++;
-                    //     if(score == brickCount) {
-                    //         window.location.replace("cassebriqueslvlup.php");
-                    //     }
-                    //     else {
-                    //         if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
-                    //             powerupAleatoire = Math.floor(Math.random() * 3);
-                    //             powerup = true;
-                    //             powerupStatus = 1;
-                    //             powerupX = b.x+brickWidth/2
-                    //             powerupY = b.y+powerupRadius/2;
-                    //             powerupFalling = true;
-                    //             if(powerupAleatoire == 1 && doubleBall == false) {
-                    //                 powerupType = "doubleBalle";
-                    //             }
-                    //             else if(powerupAleatoire == 2 && balleFeu == false) {
-                    //                 powerupType = "balleFeu"
-                    //             }
-                    //             else {
-                    //                 powerupType = "grandeRaquette"
-                    //             }
-                    //         } 
-                    //     }
-                    // }
+                    /*if(x+ballRadius/2 >= b.x && x-ballRadius/2 <= b.x+brickWidth && y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight) {
+                        if(balleFeu == false) {
+                            dy = -dy;
+                            if(x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y || x+ballRadius > b.x && x+ballRadius < b.x+brickWidth && y+ballRadius == b.y+brickHeight) {
+                                dy = -dy;
+                            }
+                            else if(x+ballRadius == b.x && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight || x+ballRadius == b.x+brickWidth && y+ballRadius > b.y && y+ballRadius < b.y+brickHeight) {
+                                dx = -dx;
+                            }
+                        }
+                        b.status -= 1;
+                        score++;
+                        if(score == brickCount) {
+                            window.location.replace("cassebriqueslvlup.php");
+                        }
+                        else {
+                            if(Math.round(Math.random()) == 0 && powerupStatus == 0) {
+                                powerupAleatoire = Math.floor(Math.random() * 3);
+                                powerup = true;
+                                powerupStatus = 1;
+                                powerupX = b.x+brickWidth/2
+                                powerupY = b.y+powerupRadius/2;
+                                powerupFalling = true;
+                                if(powerupAleatoire == 1 && doubleBall == false) {
+                                    powerupType = "doubleBalle";
+                                }
+                                else if(powerupAleatoire == 2 && balleFeu == false) {
+                                    powerupType = "balleFeu"
+                                }
+                                else {
+                                    powerupType = "grandeRaquette"
+                                }
+                            } 
+                        }
+                    }*/
 
                     // A gauche
-                    if(y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight && x+ballRadius >= b.x && dx > 0) {
+                    if(x+ballRadius >= b.x && x+ballRadius < b.x+brickWidth && y >= b.y && y+ballRadius <= b.y+brickHeight) {
                         dx = -dx;
                         b.status -= 1;
                         console.log("Gauche");
                     }
+                    console.log(x, b.x+brickWidth)
                     // A droite
-                    if(y+ballRadius/2 > b.y && y-ballRadius/2 < b.y+brickHeight && x <= b.x+brickWidth && x+ballRadius >= b.x+brickWidth && dx < 0) {
+                    else if(x <= b.x+brickWidth && x > b.x && y >= b.y && y+ballRadius <= b.y+brickHeight) {
                         dx = -dx;
                         b.status -= 1;
                         console.log("Droite");
@@ -311,12 +320,13 @@
                         b.status -= 1;
                         console.log("Haut/bas");
                     }
+                    // else 
                     // A gauche ou a droite
                     // else if() {
                     //     dx = -dx;
                     //     b.status -= 1;
                     //     console.log("Gauche/droite");
-                    // }
+                    // }*/
 
 
 
