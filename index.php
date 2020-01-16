@@ -50,9 +50,6 @@
                         <div class="carousel-item">
                         <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
                         </div>
-                        <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-                        </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -83,13 +80,13 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <p class="card-image-jeu"><a href="#"><img class="card-img-top" src="images/wip.jpg" alt="Travaux"></a></p>
+                        <p class="card-image-jeu"><a href="demineur.php"><img class="card-img-top" src="images/demineur.png" alt="Démineur"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
-                            <a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a>
+                            <a href="demineur.php">Démineur</a>
                             </h4>
-                            <h5></h5>
-                            <p class="card-text">Nos développeurs te préparent de nouveaux jeux, patience!</p>
+                            <h5>Nouveau</h5>
+                            <p class="card-text">Dévoile toutes les cases mais évite de toucher une bombe...</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>

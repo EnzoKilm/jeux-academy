@@ -23,190 +23,46 @@
 <body>
     <?php include 'nav.php';?>
 
-    <!-- Page Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
-                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+    <!-- On récupère les infos pour les afficher sur la page -->
+    <?php
+        // On récupère l'pseudo souhaité
+        $pseudo = $_REQUEST['pseudo'];
+        // Connexion à la bage de données
+        $db_username = 'root';
+        $db_password = 'admindb';
+        $db_name     = 'jeux-academy';
+        $db_host     = 'localhost';
+        $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
+                or die('Connexion à la base de données impossible.');
 
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                <a href="#">Item One</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                <a href="#">Item Two</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                <a href="#">Item Three</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                <a href="#">Item Four</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                <a href="#">Item Five</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                <a href="#">Item Six</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.row -->
-
-            </div>
-            <!-- /.col-lg-9 -->
-            
-            <div class="col-lg-3">
-                <?php
-                // On récupère l'id souhaité
-                $id = $_REQUEST['id'];
-                // Connexion à la bage de données
-                $db_username = 'root';
-                $db_password = 'admindb';
-                $db_name     = 'jeux-academy';
-                $db_host     = 'localhost';
-                $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
-                        or die('Connexion à la base de données impossible.');
-                if ($_SESSION['id'] == $_REQUEST['id']) {
-                    // On récupère le propre id de l'utilisateur
-                    $id = $_SESSION['id'];
-                    $requete = "SELECT pseudo FROM users where id = '".$id."'";
-                    // On récupère la requête
-                    $exec_requete = mysqli_query($db,$requete);
-                    $reponse      = mysqli_fetch_array($exec_requete);
-                    $pseudo = $reponse[0];
-                    echo "<h1 class='my-4'>$pseudo</h1>";
-                } else {
-                    $requete = "SELECT count(*) FROM users";
-                    $exec_requete = mysqli_query($db,$requete);
-                    $reponse      = mysqli_fetch_array($exec_requete);
-                    $nombre_id = $reponse['count(*)'];
-                    // Si il existe
-                    if ($_REQUEST['id'] <= $nombre_id && $_REQUEST['id'] > 0) {
-                        $requete = "SELECT pseudo FROM users where id = '".$id."'";
-                        // On récupère la requête
-                        $exec_requete = mysqli_query($db,$requete);
-                        $reponse      = mysqli_fetch_array($exec_requete);
-                        $pseudo = $reponse[0];
-                        echo "<h1 class='my-4'>$pseudo</h1>";
-                    } else {
-                        header("location:404.php");
-                    }
+        // Si le pseudo cherché est celui de l'utilisateur connecté
+        if ($_SESSION['pseudo'] == $_REQUEST['pseudo']) {
+            // On affiche son profil
+            $pseudo = $_SESSION['pseudo'];
+            include 'profil_content.php';
+        } else {
+            // On regarde si le pseudo est dans la base de données
+            $requete = "SELECT pseudo FROM users";
+            $exec_requete = mysqli_query($db,$requete);
+            // On regarde chaque si le pseudo correspond au pseudo d'un membre
+            while ($row = mysqli_fetch_array($exec_requete)) {
+                if ($row[0] == $_REQUEST['pseudo']) {
+                    $pseudo_find = $row;
+                    break;
                 }
-                ?>
-                <img src="images/profil.png" alt="Profil" id="profil">
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Jeux préférés</a>
-                    <a href="#" class="list-group-item">Joueurs</a>
-                </div>
-            </div>
-            <!-- /.col-lg-3 -->
-        </div>
-        <!-- /.row -->
-
-    </div>
-    <!-- /.container -->
+            }
+            // Si on a trouvé une correspondance
+            if (isset($pseudo_find)) {
+                // On affiche le profil
+                include 'profil_content.php';
+            } else {
+                // Sinon on affiche la page d'erreur
+                include '404.php';
+            }
+        }
+    ?>
+    <!-- Page Content -->
+    
 
     <!-- Footer -->
     <?php include 'footer.html';?>

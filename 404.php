@@ -5,6 +5,8 @@
     </head>
 
     <body>
-        <h1>La page recherchée n'existe pas</h1>
+        <div class="error404">
+            <h1>La page recherchée n'existe pas</h1>
+        </div>
     </body>
 </html>

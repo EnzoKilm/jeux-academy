@@ -15,3 +15,16 @@ img#trophee {
     margin-bottom: 30px;
     border: 4mm ridge rgba(188, 169, 0, 1);
 }
+
+/* Style de la page d'erreur 404 */
+.error404 {
+    margin: 10%;
+    text-align: center;
+}
+.error404 h1 {
+    display: inline-block;
+    background-color: #343A40;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
