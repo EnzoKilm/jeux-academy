@@ -53,9 +53,9 @@
                 $niveau = $reponse[0];
 
                 // Si le joueur n'a pas encore joué au jeu
-                if(isset($resultat)) {
+                if(isset($id)) {
                     // On ajoute ses infos dans la table du jeu dans la db
-                    $requete = "INSERT INTO casse_briques_users(id_joueur,niveau) VALUES ('".$id."',1)";
+                    $requete = "INSERT INTO casse_briques_users(id,niveau,id_joueur) VALUES (1,'".$id."')";
                 }
                 
                 $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$niveau."'";
@@ -63,7 +63,7 @@
                 $value = mysqli_fetch_array($result);
                 $map = $value[0];
 
-                mysqli_close($db); // fermer la connexion            
+                mysqli_close($db); // fermer la connexion
             ?>
         </div>
         <!-- /.row -->
