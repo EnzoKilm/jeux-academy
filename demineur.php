@@ -17,7 +17,7 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/minesweeper.css" type="text/css" rel="stylesheet" />
+    <link href="css/demineur.css" type="text/css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">

@@ -334,6 +334,7 @@
                             b.status -= 1;
                             score++;
                             if(score == brickCount) {
+                                $_SESSION['cassebrique_win'] = true;
                                 window.location.replace("cassebriqueslvlup.php");
                             }
                         }
