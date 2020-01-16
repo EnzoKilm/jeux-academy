@@ -56,8 +56,8 @@
                 // On affiche le profil
                 include 'profil_content.php';
             } else {
-                // Sinon on affiche la page d'erreur
-                include '404.php';
+                // Sinon on affiche un message d'erreur
+                echo '<div class="error404"><h1>La page recherchée n\'existe pas</h1></div>';
             }
         }
     ?>

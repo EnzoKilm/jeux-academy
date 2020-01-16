@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <p class="card-image-jeu"><a href="cassebriques.php"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a></p>
+                        <p class="card-image-jeu"><a href="jeu.php?jeu=cassebriques"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="cassebriques.php">Casse briques</a>
@@ -80,7 +80,7 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <p class="card-image-jeu"><a href="demineur.php"><img class="card-img-top" src="images/demineur.png" alt="Démineur"></a></p>
+                        <p class="card-image-jeu"><a href="jeu.php?jeu=demineur"><img class="card-img-top" src="images/demineur.png" alt="Démineur"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="demineur.php">Démineur</a>
