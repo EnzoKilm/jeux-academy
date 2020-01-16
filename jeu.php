@@ -24,8 +24,13 @@
     if (!isset($nom_find)) {
         // On affiche le profil
         header('Location: 404.php');
+    } else {
+        // On récupère les infos du jeu
+        // 0:id / 1:nom / 2:display_name / 3:developpeur / 4:note_positive / 5:note_negative
+        $requete = "SELECT * FROM jeux WHERE nom='".$nom_find[0]."'";
+        $exec_requete = mysqli_query($db,$requete);
+        $infos_jeu = mysqli_fetch_array($exec_requete);
     }
-    
 ?>
 <head>
     <meta charset="utf-8">
@@ -51,13 +56,49 @@
     <?php include 'nav.php';?>
 
     <!-- Page Content -->
-    <div class="container">
-        <div class="row"></div>
-        <!-- /.row -->
-        
+    <div class="container" id="game">
+        <div class="infos_jeu">
+            <div class="titre">
+                <h1><?php echo $infos_jeu[2]; ?></h1>
+                <hr/>
+                <h2>par : <?php echo $infos_jeu[3]; ?></h2>
+            </div>
+            <div class="stats">
+                <h3>Statistiques</h3>
+                <hr/>
+            </div>
+            <div class="vote">
+                <h4>Vote pour le jeu !</h4>
+                <hr/>
+                <ul class="rs">
+                    <li>
+                        <a class="cercle" id="up" target="_blank" href="#" title="Up">
+                        <i class="far fa-thumbs-up"></i></a>
+                    </li>
+                    <li>
+                        <a class="cercle" id="down" target="_blank" href="#" title="Down">
+                        <i class="far fa-thumbs-down"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <br/>
         <?php include $_REQUEST['jeu'].'.php';?>
         <br/>
+        <div class="autres_jeux">
+            <div class="jeu_random">
+
+            </div>
+            <div class="jeu_random">
+
+            </div>
+            <div class="jeu_random">
+
+            </div>
+            <div class="jeu_random">
+
+            </div>
+        </div>
     </div>
     <!-- /.container -->
     

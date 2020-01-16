@@ -67,7 +67,7 @@
                         <p class="card-image-jeu"><a href="jeu.php?jeu=cassebriques"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
-                            <a href="cassebriques.php">Casse briques</a>
+                            <a href="jeu.php?jeu=cassebriques">Casse briques</a>
                             </h4>
                             <h5>Nouveau</h5>
                             <p class="card-text">Casse les briques à l'aide de la balle et de la raquette.</p>
@@ -83,7 +83,7 @@
                         <p class="card-image-jeu"><a href="jeu.php?jeu=demineur"><img class="card-img-top" src="images/demineur.png" alt="Démineur"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
-                            <a href="demineur.php">Démineur</a>
+                            <a href="jeu.php?jeu=demineur">Démineur</a>
                             </h4>
                             <h5>Nouveau</h5>
                             <p class="card-text">Dévoile toutes les cases mais évite de toucher une bombe...</p>
