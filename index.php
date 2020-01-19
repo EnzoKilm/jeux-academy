@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>Jeux Academy | Accueil</title>
+    <link rel="icon" href="images/favicon.ico" />
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -64,7 +65,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <p class="card-image-jeu"><a href="jeu.php?jeu=cassebriques"><img class="card-img-top" src="images/cassebriques.png" alt="Casse briques"></a></p>
+                        <p class="card-image-jeu"><a href="jeu.php?jeu=cassebriques"><img class="card-img-top" src="images/miniatures/cassebriques.png" alt="Casse briques"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="jeu.php?jeu=cassebriques">Casse briques</a>
@@ -80,7 +81,7 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <p class="card-image-jeu"><a href="jeu.php?jeu=demineur"><img class="card-img-top" src="images/demineur.png" alt="Démineur"></a></p>
+                        <p class="card-image-jeu"><a href="jeu.php?jeu=demineur"><img class="card-img-top" src="images/miniatures/demineur.png" alt="Démineur"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="jeu.php?jeu=demineur">Démineur</a>
@@ -96,7 +97,7 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <p class="card-image-jeu"><a href="#"><img class="card-img-top" src="images/wip.jpg" alt="Travaux"></a></p>
+                        <p class="card-image-jeu"><a href="#"><img class="card-img-top" src="images/miniatures/wip.png" alt="Travaux"></a></p>
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a>

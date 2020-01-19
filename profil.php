@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>Jeux Academy | Profil</title>
+    <link rel="icon" href="images/favicon.ico" />
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">

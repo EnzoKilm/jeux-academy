@@ -4659,7 +4659,7 @@
   .card-img-top {
     width: auto;
     max-width: 100%;
-    max-height: 200px;
+    max-height: 180px;
     border-top-left-radius: calc(0.25rem - 1px);
     border-top-right-radius: calc(0.25rem - 1px);
   }

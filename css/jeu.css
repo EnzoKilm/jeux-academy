@@ -146,9 +146,28 @@ div.autres_jeux {
     margin-right: 1%;
     background-color: #EEEEEE;
     display: inline-block;
+    max-height: 100%;
 }
 div.jeu_random {
-    height: 25%;
-    border-style: solid;
-    border-color: red;
+    position: relative;
+    height: 33.33%;
+    text-align: center;
+}
+div.jeu_random#middle {
+    border-style: solid none;
+    border-width: 2px;
+}
+div.jeu_random a img {
+    position: relative;
+    max-width: 100%;
+    max-height: 75%;
+    padding: 2%;
+    border-bottom: solid 1px #000;
+}
+div.jeu_random a h4 {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding: 0 2% 2% 2%;
 }
