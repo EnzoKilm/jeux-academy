@@ -23,6 +23,9 @@
 <body>
     <?php include 'nav.php';?>
 
+    <!-- A RÊGLER : PROBLEME, QUAND ON SAISIT UN MÊME PSEUDO AVEC DES 
+    MAJUSCULES OU MINUSCULES DIFFERENTES ON TOMBE SUR LE MÊME PROFIL -->
+
     <!-- On récupère les infos pour les afficher sur la page -->
     <?php
         // On récupère l'pseudo souhaité
