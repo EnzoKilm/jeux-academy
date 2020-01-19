@@ -3,41 +3,6 @@
 ?>
 <link href="css/demineur.css" type="text/css" rel="stylesheet" />
 
-<?php
-    // connexion à la base de données
-    $db_username = 'root';
-    $db_password = 'admindb';
-    $db_name     = 'jeux-academy';
-    $db_host     = 'localhost';
-    $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
-            or die('Connexion à la base de données impossible.');
-
-    // On récupère l'id du joueur
-    $sql = "SELECT id FROM users where pseudo = '".$_SESSION['pseudo']."'";
-    $result = mysqli_query($db,$sql);
-    $value = mysqli_fetch_array($result);
-    $id = $value[0];
-
-    // On regarde le niveau du joueur
-    $requete = "SELECT niveau FROM casse_briques_users where id_joueur = '".$id."'";
-    $exec_requete = mysqli_query($db,$requete);
-    $reponse = mysqli_fetch_array($exec_requete);
-    $niveau = $reponse[0];
-
-    // Si le joueur n'a pas encore joué au jeu
-    if(isset($resultat)) {
-        // On ajoute ses infos dans la table du jeu dans la db
-        $requete = "INSERT INTO casse_briques_users(id_joueur,niveau) VALUES ('".$id."',1)";
-    }
-    
-    $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$niveau."'";
-    $result = mysqli_query($db,$requete);
-    $value = mysqli_fetch_array($result);
-    $map = $value[0];
-
-    mysqli_close($db); // fermer la connexion            
-?>
-
 <div class="jeu">
     <div class="minesweeper">
         <div id="left" class="result"></div>

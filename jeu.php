@@ -75,7 +75,15 @@
     }
 
     // Gestion des votes du jeu
-    // if (isset())
+    // if (isset($_REQUEST['vote'])) {
+    //     if($_REQUEST['vote'] == 'up') {
+    //         // On regarde si le joueur a déjà voté
+    //         $requete = "SELECT * FROM $infos_jeu[2].'_users' WHERE id_joueur='".$_SESSION['id']."'";
+    //         $exec_requete = mysqli_query($db,$requete);
+    //         $joueur_vote = mysqli_fetch_array($exec_requete);
+    //         echo $joueur_vote;
+    //     }
+    // }
 
     mysqli_close($db); // On ferme la connexion
 ?>

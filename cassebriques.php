@@ -18,7 +18,7 @@
     $id = $value[0];
 
     // On regarde le niveau du joueur
-    $requete = "SELECT niveau FROM casse_briques_users where id_joueur = '".$id."'";
+    $requete = "SELECT niveau FROM cassebriques_users where id_joueur = '".$id."'";
     $exec_requete = mysqli_query($db,$requete);
     $reponse = mysqli_fetch_array($exec_requete);
     $niveau = $reponse[0];
@@ -26,10 +26,10 @@
     // Si le joueur n'a pas encore joué au jeu
     if(isset($id)) {
         // On ajoute ses infos dans la table du jeu dans la db
-        $requete = "INSERT INTO casse_briques_users(id,niveau,id_joueur) VALUES (1,'".$id."')";
+        $requete = "INSERT INTO cassebriques_users(id,niveau,id_joueur) VALUES (1,'".$id."')";
     }
     
-    $requete = "SELECT map FROM casse_briques_settings WHERE id = '".$niveau."'";
+    $requete = "SELECT map FROM cassebriques_settings WHERE id = '".$niveau."'";
     $result = mysqli_query($db,$requete);
     $value = mysqli_fetch_array($result);
     $map = $value[0];
