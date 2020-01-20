@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php session_start(); ?>
 <?php $page = 'index';?>
 <head>
     <meta charset="utf-8">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php session_start(); ?>
 <?php $page = 'jeu';?>
 <?php
     // connexion à la base de données
@@ -75,15 +76,20 @@
     }
 
     // Gestion des votes du jeu
-    // if (isset($_REQUEST['vote'])) {
-    //     if($_REQUEST['vote'] == 'up') {
-    //         // On regarde si le joueur a déjà voté
-    //         $requete = "SELECT * FROM $infos_jeu[2].'_users' WHERE id_joueur='".$_SESSION['id']."'";
-    //         $exec_requete = mysqli_query($db,$requete);
-    //         $joueur_vote = mysqli_fetch_array($exec_requete);
-    //         echo $joueur_vote;
-    //     }
-    // }
+    if (isset($_REQUEST['vote'])) {
+        if($_REQUEST['vote'] == 'up' || $_REQUEST['vote'] == 'down') {
+            // On regarde si le joueur a déjà voté
+            $requete = "SELECT vote FROM ".$infos_jeu[1]."_users WHERE id_joueur =".$_SESSION['id'].";";
+            $exec_requete = mysqli_query($db,$requete);
+            $reponse = mysqli_fetch_array($exec_requete);
+            if ($_REQUEST['vote'] == 'up') {
+                $db->query("UPDATE ".$infos_jeu[1]."_users SET vote='1' WHERE id_joueur = ".$_SESSION['id']."");
+            } else {
+                $db->query("UPDATE ".$infos_jeu[1]."_users SET vote='0' WHERE id_joueur = ".$_SESSION['id']."");
+            }
+            header('Location: jeu.php?jeu='.$infos_jeu[1]);
+        }
+    }
 
     mysqli_close($db); // On ferme la connexion
 ?>

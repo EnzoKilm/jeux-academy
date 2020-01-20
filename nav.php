@@ -14,7 +14,6 @@
                         echo '<li class="nav-item"><a class="nav-link" href="index.php"><i class="fas fa-home"></i> Accueil</a></li>';
                     }
                         
-                    session_start();
                     if(isset($_GET['deconnexion'])) { 
                         if($_GET['deconnexion']==true) {  
                             session_unset();

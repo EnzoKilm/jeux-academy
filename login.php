@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php session_start(); ?>
 <?php $page = 'login';?>
 <head>
     <meta charset="utf-8">
