@@ -64,53 +64,60 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                        <p class="card-image-jeu"><a href="jeu.php?jeu=cassebriques"><img class="card-img-top" src="images/miniatures/cassebriques.png" alt="Casse briques"></a></p>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <a href="jeu.php?jeu=cassebriques">Casse briques</a>
-                            </h4>
-                            <h5>Nouveau</h5>
-                            <p class="card-text">Casse les briques à l'aide de la balle et de la raquette.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                        </div>
-                    </div>
+                    <?php
+                        // connexion à la base de données
+                        $db_username = 'root';
+                        $db_password = 'admindb';
+                        $db_name     = 'jeux-academy';
+                        $db_host     = 'localhost';
+                        $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
+                                or die('Connexion à la base de données impossible.');
+                        
+                        // On spécifie l'encodage qu'on reçoit
+                        $db -> set_charset("utf8");
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                        <p class="card-image-jeu"><a href="jeu.php?jeu=demineur"><img class="card-img-top" src="images/miniatures/demineur.png" alt="Démineur"></a></p>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <a href="jeu.php?jeu=demineur">Démineur</a>
-                            </h4>
-                            <h5>Nouveau</h5>
-                            <p class="card-text">Dévoile toutes les cases mais évite de toucher une bombe...</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                        </div>
-                    </div>
+                        // On récupère les noms des jeux
+                        $requete = "SELECT nom FROM jeux";
+                        $exec_requete = mysqli_query($db,$requete);
+                        $nb_games = 3;
+                        while ($row = mysqli_fetch_array($exec_requete)) {
+                            $nb_games -= 1;
+                            if ($nb_games == 0) {
+                                $nb_games = 3;
+                            }
+                            // On récupère les infos du jeu
+                            // 0:id / 1:nom / 2:display_name / 3:developpeur / 4:description
+                            $requete = "SELECT * FROM jeux WHERE nom='".$row[0]."'";
+                            $execution_requete = mysqli_query($db,$requete);
+                            $infos_jeu = mysqli_fetch_array($execution_requete);
+                            
+                            // On affiche le jeu
+                            echo '<div class="col-lg-4 col-md-6 mb-4"><div class="card h-100">';
+                            echo '<p class="card-image-jeu"><a href="jeu.php?jeu='.$infos_jeu[1].'">';
+                            echo '<img class="card-img-top" src="images/miniatures/'.$infos_jeu[1].'.png" alt="'.$infos_jeu[2].'"></a></p>';
+                            echo '<div class="card-body"><h4 class="card-title">';
+                            echo '<a href="jeu.php?jeu='.$infos_jeu[1].'">'.$infos_jeu[2].'</a></h4>';
+                            echo '<p class="card-text">'.$infos_jeu[4].'</p></div>';
+                            echo '<div class="card-footer"><small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small></div>';
+                            echo '</div></div>';
+                        }
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                        <p class="card-image-jeu"><a href="#"><img class="card-img-top" src="images/miniatures/wip.png" alt="Travaux"></a></p>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a>
-                            </h4>
-                            <h5></h5>
-                            <p class="card-text">Nos développeurs te préparent de nouveaux jeux, patience!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                        </div>
-                    </div>
+                        if ($nb_games == 3) {
+                            $nb_games = 0;
+                        }
+
+                        for ($i = 0; $i < $nb_games; $i++) {
+                            // On affiche le jeu
+                            echo '<div class="col-lg-4 col-md-6 mb-4"><div class="card h-100">';
+                            echo '<p class="card-image-jeu"><a href="#">';
+                            echo '<img class="card-img-top" src="images/miniatures/wip.png" alt="Travaux"></a></p>';
+                            echo '<div class="card-body"><h4 class="card-title">';
+                            echo '<a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a></h4>';
+                            echo '<p class="card-text">Nos développeurs te préparent de nouveaux jeux, patience!</p></div>';
+                            echo '<div class="card-footer"><small class="text-muted"></small></div>';
+                            echo '</div></div>';
+                        }
+                    ?>
                 </div>
                 <!-- /.row -->
             </div>
