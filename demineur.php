@@ -66,21 +66,20 @@
     $id_demineur = $reponse[0];
 
     // Si le joueur n'a pas encore joué au jeu
-    if(!isset($id_demineur)) {
-        echo 'slt';
+    if(isset($id_demineur) == null) {
         // On ajoute ses infos dans la table du jeu dans la db
-        $requete = "INSERT INTO demineur_users(win,loose,bombs_exploded,bombs_defused,id_joueur) VALUES (0,0,0,0,$id)";
+        $requete = "INSERT INTO demineur_users(win,loose,bombs_exploded,bombs_defused,id_joueur,vote) VALUES (0,0,0,0,$id,NULL)";
+        $db->query($requete);
     }
     
     // On récupère les stats du joueur
     $requete = "SELECT * FROM demineur_users WHERE id_joueur = $id";
     $exec_requete = mysqli_query($db,$requete);
     $reponse = mysqli_fetch_array($exec_requete);
-    // foreach($reponse as $value){
-    //     echo $value."<br>";
+    // 0:id / 1:win / 2:loose / 3:bombs_exploded / 4:bombs_defused / 5:id_joueur / 6:vote
+    // for ($i = 0; $i < count($reponse)/2; $i++) {
+    //     echo $reponse[$i];
     // }
-    // ON RECUPERE BIEN LES STATS DU JOUEUR MAIS IL FAUT LES ORDONNER
-    // TROUVER MEILLEURE FAÇON DE RÉCUPÉRER LES STATS
     
     // On ajoute les stats au joueur
     

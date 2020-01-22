@@ -56,3 +56,29 @@ input[type=submit]:hover {
     display: block;
     float: right;
 }
+
+/* Messages d'erreur inscription */
+.divRight form p.success {
+    color:green;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}
+.divRight form p.invalidname {
+    color:red;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}
+.divRight form p.incorrectrep {
+    color:orange;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}
+.divRight form p.court {
+    color:orange;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}

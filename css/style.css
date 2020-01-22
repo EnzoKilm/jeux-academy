@@ -28,3 +28,23 @@ img#trophee {
     padding: 30px;
     border-radius: 10px;
 }
+
+/* Étoiles pour la notation des jeux */
+.star-rating, .back-stars, .front-stars {
+    display: flex;
+}
+.star-rating {
+    align-items: center;
+    justify-content: center;
+}
+.back-stars {
+    color: #bb5252;
+    position: relative;
+}
+.front-stars {
+    color: orange;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: all 0.5s;
+}

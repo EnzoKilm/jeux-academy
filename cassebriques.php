@@ -24,9 +24,10 @@
     $niveau = $reponse[0];
 
     // Si le joueur n'a pas encore joué au jeu
-    if(isset($id)) {
+    if(isset($niveau) == null) {
         // On ajoute ses infos dans la table du jeu dans la db
-        $requete = "INSERT INTO cassebriques_users(id,niveau,id_joueur) VALUES (1,'".$id."')";
+        $requete = "INSERT INTO cassebriques_users(niveau,id_joueur,vote) VALUES (1,'".$id."',NULL)";
+        $db->query($requete);
     }
     
     $requete = "SELECT map FROM cassebriques_settings WHERE id = '".$niveau."'";

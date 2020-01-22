@@ -18,6 +18,9 @@
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
 
+    <!-- Less css -->
+    <link rel="stylesheet/less" type="text/css" href="css/style.less" />
+
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
 </head>
@@ -98,8 +101,37 @@
                             echo '<div class="card-body"><h4 class="card-title">';
                             echo '<a href="jeu.php?jeu='.$infos_jeu[1].'">'.$infos_jeu[2].'</a></h4>';
                             echo '<p class="card-text">'.$infos_jeu[4].'</p></div>';
-                            echo '<div class="card-footer"><small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small></div>';
-                            echo '</div></div>';
+
+                            // Affichage du nombre d'étoiles selon les votes des joueurs
+                            $request = "SELECT vote FROM ".$row[0]."_users";
+                            $requete_exec = mysqli_query($db,$request);
+
+                            $notes_positives = 1;
+                            $nombre_notes = 1;
+                            while ($colonne = mysqli_fetch_array($requete_exec)) {
+                                if ($colonne[0] == 1) {
+                                    $notes_positives += 1;
+                                    $nombre_notes += 1;
+                                } else if ($colonne[0] == null) {
+                                    $nombre_notes -= 1;
+                                } else {
+                                    $nombre_notes += 1;
+                                }
+                            }
+                            $notes_positives /= $nombre_notes;
+                            $etoiles = round($notes_positives*5, 1);
+
+                            echo '<div class="card-footer"><div class="star-rating" title="'.$etoiles.'/5"><div class="back-stars">';
+                            for ($i = 0; $i < 5; $i++) {
+                                echo '<i class="fa fa-star" aria-hidden="true"></i>';
+                            }
+                            $etoiles_pourcent = $etoiles * 20;
+                            $etoiles_pourcent = $etoiles_pourcent.'%';
+                            echo '<div class="front-stars" style="width: '.$etoiles_pourcent.'">';
+                            for ($i = 0; $i < 5; $i++) {
+                                echo '<i class="fa fa-star" aria-hidden="true"></i>';
+                            }
+                            echo '</div></div></div></div></div></div>';
                         }
 
                         if ($nb_games == 3) {
@@ -114,9 +146,10 @@
                             echo '<div class="card-body"><h4 class="card-title">';
                             echo '<a href="#"><i class="fas fa-exclamation-triangle"></i> Coming soon <i class="fas fa-exclamation-triangle"></i></a></h4>';
                             echo '<p class="card-text">Nos développeurs te préparent de nouveaux jeux, patience!</p></div>';
-                            echo '<div class="card-footer"><small class="text-muted"></small></div>';
                             echo '</div></div>';
                         }
+                        
+                        mysqli_close($db); // fermer la connexion
                     ?>
                 </div>
                 <!-- /.row -->
