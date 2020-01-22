@@ -109,9 +109,6 @@
 
     <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

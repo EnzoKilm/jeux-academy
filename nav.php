@@ -2,10 +2,13 @@
             <div class="container">
                 <a class="navbar-brand" href="index.php"><i class="fas fa-gamepad"></i> Jeux Academy</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+                    <form id="searchForm" class="research" action="recherche.php">
+                        <input type="search" name="recherche" id="recherche" placeholder="Rercherche">
+                    </form>
                     <?php
                     if($page == 'index') {
                         echo '<li class="nav-item"><a class="nav-link active" href="index.php"><i class="fas fa-home"></i> Accueil</a></li>';

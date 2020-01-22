@@ -20,9 +20,6 @@
 
     <!-- Less css -->
     <link rel="stylesheet/less" type="text/css" href="css/style.less" />
-
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -162,11 +159,6 @@
 
     <!-- Footer -->
     <?php include 'footer.html';?>
-    
-    <!-- Bootstrap core JavaScript -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/fontawesome.js"></script>
 </body>
 
 </html>
