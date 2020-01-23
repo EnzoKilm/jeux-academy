@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css" media="screen" type="text/css" />
 
     <!-- Custom styles for this template -->
@@ -34,7 +35,7 @@
         <!-- zone de connexion -->
         
         <span class="divLeft">
-            <form method="post" action="connexion.php">
+            <form method="post" action="connexion.php" class="conn-form">
                 <h1>Connexion</h1>
                 
                 <label><b>Pseudo</b></label>
@@ -55,7 +56,7 @@
         </span>
 
         <span class="divRight">
-            <form method="post" action="inscription.php">
+            <form method="post" action="inscription.php" class="conn-form">
                 <h1>Inscription</h1>
                 <?php
                 if(isset($_GET['success'])) {

@@ -53,22 +53,22 @@ img#trophee {
 form.research {
     margin-right: 230px;
 }
-input {
+form.research input {
 	outline: none;
 }
-input[type=search] {
+form.research input[type=search] {
 	-webkit-appearance: textfield;
 	-webkit-box-sizing: content-box;
 	font-family: inherit;
 	font-size: 100%;
 }
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
+form.research input::-webkit-search-decoration,
+form.research input::-webkit-search-cancel-button {
 	display: none; 
 }
 
 
-input[type=search] {
+form.research input[type=search] {
 	background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
 	border: solid 1px #ccc;
 	padding: 9px 10px 9px 32px;
@@ -82,10 +82,10 @@ input[type=search] {
 	-moz-transition: all .5s;
 	transition: all .5s;
 }
-input[type=search]:focus {
+form.research input[type=search]:focus {
 	width: 130px;
 	background-color: #fff;
-	border-color: #66CC75;
+	border-color: #1c201d;
 	
 	-webkit-box-shadow: 0 0 5px #343a4080;
 	-moz-box-shadow: 0 0 5px #343a4080;
@@ -93,9 +93,9 @@ input[type=search]:focus {
 }
 
 
-input:-moz-placeholder {
-	color: #999;
+form.research input:-moz-placeholder {
+	color: #00000080;
 }
-input::-webkit-input-placeholder {
-	color: #999;
+form.research input::-webkit-input-placeholder {
+	color: #00000080;
 }

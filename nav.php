@@ -1,5 +1,5 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="nav">
-            <div class="container">
+            <div class="container" id="nav">
                 <a class="navbar-brand" href="index.php"><i class="fas fa-gamepad"></i> Jeux Academy</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
