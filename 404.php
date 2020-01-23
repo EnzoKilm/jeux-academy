@@ -23,7 +23,8 @@
 
     <!-- Page Content -->
     <div class="error404">
-        <h1>La page recherchée n'existe pas</h1>
+        <h1>404</h1><br/>
+        <h2>La page recherchée n'existe pas</h2>
     </div>
 
     <!-- Footer -->

@@ -21,7 +21,7 @@ img#trophee {
     margin: 10%;
     text-align: center;
 }
-.error404 h1 {
+.error404 h1, .error404 h2 {
     display: inline-block;
     background-color: #343A40;
     color: white;
@@ -67,7 +67,6 @@ form.research input::-webkit-search-cancel-button {
 	display: none; 
 }
 
-
 form.research input[type=search] {
 	background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
 	border: solid 1px #ccc;
@@ -91,7 +90,6 @@ form.research input[type=search]:focus {
 	-moz-box-shadow: 0 0 5px #343a4080;
 	box-shadow: 0 0 5px #343a4080;
 }
-
 
 form.research input:-moz-placeholder {
 	color: #00000080;

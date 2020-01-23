@@ -59,13 +59,11 @@
                 include 'profil_content.php';
             } else {
                 // Sinon on affiche un message d'erreur
-                echo '<div class="error404"><h1>La page recherchée n\'existe pas</h1></div>';
+                echo '<div class="error404"><h1>404</h1><br/><h2>La page recherchée n\'existe pas</h2></div>';
             }
         }
     ?>
-    <!-- Page Content -->
     
-
     <!-- Footer -->
     <?php include 'footer.html';?>
 </body>
