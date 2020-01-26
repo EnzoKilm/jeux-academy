@@ -9,22 +9,8 @@
     <meta name="author" content="">
 
     <title>Jeux Academy | Connexion/inscription</title>
-    <link rel="icon" href="images/favicon.ico" />
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/login.css" media="screen" type="text/css" />
-
-    <!-- Custom styles for this template -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
-    <!-- Import des éléments généraux du site -->
-    <script> 
-    $(function(){
-    $("#footer").load("footer.html"); 
-    });
-    </script>
+    
+    <?php include 'head.html';?>
 </head>
 
 <body>

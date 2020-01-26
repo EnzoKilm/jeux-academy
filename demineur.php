@@ -26,22 +26,28 @@
 </div>
 
 <?php
+    // On met les infos des cookies dans un tableau
+    $cookieInfos = array();
     // On récupère les infos des cookies et on reset les cookies       sec  min  hr
     if (isset($_COOKIE['win'])) {
         $win = true;
         setcookie("win", "", time() + 60 * 60 * 24);
+        $cookieInfos[0] = $win;
     }
     if (isset($_COOKIE['loose'])) {
         $loose = true;
         setcookie("loose", "", time() + 60 * 60 * 24);
+        $cookieInfos[1] = $loose;
     }
     if (isset($_COOKIE['bombs_exploded'])) {
         $bombs_exploded = $_COOKIE['bombs_exploded'];
         setcookie("bombs_exploded", "", time() + 60 * 60 * 24);
+        $cookieInfos[2] = $bombs_exploded;
     }
     if (isset($_COOKIE['bombs_defused'])) {
         $bombs_defused = $_COOKIE['bombs_defused'];
         setcookie("bombs_defused", "", time() + 60 * 60 * 24);
+        $cookieInfos[3] = $bombs_defused;
     }
 
     // On met à jour la base de données
@@ -76,13 +82,21 @@
     $requete = "SELECT * FROM demineur_users WHERE id_joueur = $id";
     $exec_requete = mysqli_query($db,$requete);
     $reponse = mysqli_fetch_array($exec_requete);
+    $dbInfos = array();
     // 0:id / 1:win / 2:loose / 3:bombs_exploded / 4:bombs_defused / 5:id_joueur / 6:vote
-    // for ($i = 0; $i < count($reponse)/2; $i++) {
-    //     echo $reponse[$i];
-    // }
+    for ($i = 0; $i < count($reponse)/2-2; $i++) {
+        $dbInfos[] = $reponse[$i];
+    }
     
-    // On ajoute les stats au joueur
-    
+    // On additionne les anciennes stats avec les nouvelles
+    for ($i = 1; $i < 5; $i++) {
+        if (isset($cookieInfos[$i])) {
+            $dbInfos[$i] += $reponse[$i];
+        }
+    }
+
+    // On met à jour les infos de la base de donnés
+    $db->query("UPDATE demineur_users SET win=".$dbInfos[0].", loose=".$dbInfos[1].", bombs_exploded=".$dbInfos[2].", bombs_defused=".$dbInfos[3]." WHERE id_joueur = ".$_SESSION['id']."");
 
     mysqli_close($db); // fermer la connexion
     

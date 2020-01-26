@@ -100,15 +100,8 @@
     <meta name="author" content="">
 
     <title>Jeux Academy | <?php echo $infos_jeu[2]; ?></title>
-    <link rel="icon" href="images/favicon.ico" />
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/jeu.css" type="text/css" rel="stylesheet" />
-
-    <!-- Custom styles for this template -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    
+    <?php include 'head.html';?>
 </head>
 
 <body>

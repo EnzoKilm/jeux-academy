@@ -9,17 +9,8 @@
     <meta name="author" content="">
 
     <title>Jeux Academy | Accueil</title>
-    <link rel="icon" href="images/favicon.ico" />
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
-    <!-- Less css -->
-    <link rel="stylesheet/less" type="text/css" href="css/style.less" />
+    
+    <?php include 'head.html';?>
 </head>
 
 <body>
@@ -39,27 +30,64 @@
             <!-- /.col-lg-3 -->
 
             <div class="col-lg-9">
-                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+                <div id="nouvaute" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#nouvaute" data-slide-to="0" class="active"></li>
+                        <li data-target="#nouvaute" data-slide-to="1"></li>
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-                        </div>
+                        <?php
+                            // connexion à la base de données
+                            $db_username = 'root';
+                            $db_password = 'admindb';
+                            $db_name     = 'jeux-academy';
+                            $db_host     = 'localhost';
+                            $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
+                                    or die('Connexion à la base de données impossible.');
+                            
+                            // On spécifie l'encodage qu'on reçoit
+                            $db -> set_charset("utf8");
+
+                            // On récupère le nombre de jeux
+                            $requete = "SELECT count(*) FROM jeux";
+                            $exec_requete = mysqli_query($db,$requete);
+                            $count_games = mysqli_fetch_array($exec_requete);
+
+                            if ($count_games[0] >= 1) {
+                                // On récupère les infos du premier jeu
+                                // 0:id / 1:nom / 2:display_name / 3:developpeur / 4:description
+                                $requete = "SELECT * FROM jeux WHERE id=".$count_games[0]."";
+                                $execution_requete = mysqli_query($db,$requete);
+                                $infos_jeu = mysqli_fetch_array($execution_requete);
+
+                                // On affiche le premier jeu
+                                echo '<div class="carousel-item active"><a href="jeu.php?jeu='.$infos_jeu[1].'"><img class="d-block img-fluid" src="images/miniatures/'.$infos_jeu[1].'.png" alt="'.$infos_jeu[2].'"></a></div>';
+
+                                if ($count_games >= 2) {
+                                    // On récupère les infos du deuxième jeu
+                                    // 0:id / 1:nom / 2:display_name / 3:developpeur / 4:description
+                                    $id_second_game = $count_games[0] - 1;
+                                    $requete = "SELECT * FROM jeux WHERE id=".$id_second_game."";
+                                    $execution_requete = mysqli_query($db,$requete);
+                                    $infos_jeu = mysqli_fetch_array($execution_requete);
+
+                                    // On affiche le deuxième jeu
+                                    echo '<div class="carousel-item"><a href="jeu.php?jeu='.$infos_jeu[1].'"><img class="d-block img-fluid" src="images/miniatures/'.$infos_jeu[1].'.png" alt="'.$infos_jeu[2].'"></a></div>';
+                                } else {
+                                    echo '<div class="carousel-item"><img class="d-block img-fluid" src="images/miniatures/wip.png" alt="Travaux"></div>';
+                                }
+                            } else {
+                                echo '<div class="carousel-item active"><img class="d-block img-fluid" src="images/miniatures/wip.png" alt="Travaux"></div>';
+                            }
+                        ?>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#nouvaute" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">Précédent</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#nouvaute" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only">Suivant</span>
                     </a>
                 </div>
 

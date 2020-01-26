@@ -9,17 +9,8 @@
     <meta name="author" content="">
 
     <title>Jeux Academy | Profil</title>
-    <link rel="icon" href="images/favicon.ico" />
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/79706d8da0.js" crossorigin="anonymous"></script>
+    
+    <?php include 'head.html';?>
 </head>
 
 <body>
@@ -36,6 +27,9 @@
         $db_host     = 'localhost';
         $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
                 or die('Connexion à la base de données impossible.');
+                            
+        // On spécifie l'encodage qu'on reçoit
+        $db -> set_charset("utf8");
 
         // Si le pseudo cherché est celui de l'utilisateur connecté
         if ($_SESSION['pseudo'] == $_REQUEST['pseudo']) {
@@ -59,7 +53,7 @@
                 include 'profil_content.php';
             } else {
                 // Sinon on affiche un message d'erreur
-                echo '<div class="error404"><h1>404</h1><br/><h2>La page recherchée n\'existe pas</h2></div>';
+                echo '<div id="main"><div class="fof"><h1>Erreur 404</h1><br/><h5>La personne recherchée n\'existe pas</h5></div></div>';
             }
         }
     ?>

@@ -477,8 +477,12 @@
   }
   
   .img-fluid {
+    width: auto;
     max-width: 100%;
     height: auto;
+    max-height: 350px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .img-thumbnail {
@@ -6251,6 +6255,7 @@
     transition: -webkit-transform 0.6s ease-in-out;
     transition: transform 0.6s ease-in-out;
     transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+    background-color: #adadadad;
   }
   
   @media (prefers-reduced-motion: reduce) {
