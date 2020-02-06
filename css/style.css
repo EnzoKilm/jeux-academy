@@ -114,13 +114,29 @@ form.research input::-webkit-input-placeholder {
 	color: #00000080;
 }
 
-/* Profil */
+/* Slider en haut du profil et de la page d'accueil */
+.carousel-inner {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #00000080;
+}
+
+/* Demandes d'amis sur le profil */
+.list-group, .no-friend {
+	margin-bottom: 20px;
+}
+
 p.titre-profil {
 	font-size: 2.5rem;
 	font-weight: 500;
 	line-height: 1.2;
 	margin-bottom: 1.5rem !important;
 	margin-top: 1.5rem !important;
+}
+
+img#profil {
+	min-height: 250px;
+	max-width: 100%;
 }
 
 .bold {
@@ -138,7 +154,7 @@ p.titre-profil {
 .item-left {
 	width: 70%;
 	padding: 12px 20px;
-	border-right: 1px solid #00000020;
+	border-right: 1px dashed #00000020;
 }
 .item-right {
 	width: 30%;
@@ -181,4 +197,10 @@ p.titre-profil {
 }
 h4.card-title {
 	margin: 0;
+}
+
+.no-friend {
+	padding-left: 15px;
+	font-size: 16px;
+
 }
