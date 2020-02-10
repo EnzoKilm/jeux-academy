@@ -1,0 +1,84 @@
+div#container {
+    margin: 2%;
+    padding-bottom: 52%;
+}
+
+/* Bordered form */
+form.conn-form {
+    width: 80%;
+    padding: 20px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    display: block;
+}
+
+#container h1{
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+/* Full-width inputs */
+form.conn-form input[type=text], form.conn-form input[type=password], form.conn-form input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+form.conn-form input[type=submit] {
+    background-color: #2196F3;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+form.conn-form input[type=submit]:hover {
+    background-color: white;
+    color: #2196F3;
+    border: 1px solid #2196F3;
+}
+
+.divLeft {
+    width: 45%;
+    display: block;
+    float: left;
+    margin-left: 8%;
+}
+.divRight {
+    width: 45%;
+    display: block;
+    float: right;
+}
+
+/* Messages d'erreur inscription */
+.divRight form p.success {
+    color:green;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}
+.divRight form p.invalidname {
+    color:red;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}
+.divRight form p.incorrectrep {
+    color:orange;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}
+.divRight form p.court {
+    color:orange;
+    font-size:22px; 
+    font-weight:bold;
+    text-align: center;
+}
