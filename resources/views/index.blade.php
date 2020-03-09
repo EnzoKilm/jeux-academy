@@ -1,5 +1,5 @@
-@extends('layouts.header')
+@extends('layouts.app')
 
-<h1>test</h1>
-
-@extends('layouts.footer')
+@section('content')
+    <h1>test</h1>
+@endsection
