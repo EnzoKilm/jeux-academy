@@ -7,13 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <?php
-        if(isset($title)) {
-            echo '<title>'.$title.' | Jeux Academy</title>';
-        } else {
-            echo '<title>Jeux Academy</title>';
-        }
-    ?>
+    <title>{{ config('app.name', 'Jeux-Academy') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -52,16 +46,16 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <form id="searchForm" class="research" action="{{ route('index') }}">
-                    <input type="search" name="recherche" id="recherche" placeholder="Recherche">
+                    <input type="search" name="recherche" id="recherche" placeholder="Rercherche">
                 </form>
                 @if (Route::has('login'))
                     @auth
-                        <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Home</a></li>
                     @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
 
                         @if (Route::has('register'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Inscription</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @endif
                     @endauth
                 @endif
