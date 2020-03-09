@@ -1,0 +1,206 @@
+* {
+	overflow-wrap: break-word;
+}
+
+/* Image de profil du joueur */
+img#profil {
+    width: 100%;
+    height: auto;
+    max-height: 35%;
+    margin-bottom: 30px;
+    border: 4mm ridge rgba(70, 70, 70, .7);
+}
+
+/* Image du trophée pour les tops sur la page d'accueil */
+img#trophee {
+    width: 100%;
+    max-height: 35%;
+    height: auto;
+    margin-bottom: 30px;
+    border: 4mm ridge rgba(188, 169, 0, 1);
+}
+
+/* Style de la page d'erreur 404 */
+#main{
+    display: table;
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+}
+
+.fof{
+	  display: table-cell;
+	  vertical-align: middle;
+}
+
+.fof h1{
+	  font-size: 50px;
+	  display: inline-block;
+	  padding-right: 12px;
+	  animation: type .5s alternate infinite;
+}
+
+@keyframes type{
+	  from{box-shadow: inset -3px 0px 0px #888;}
+	  to{box-shadow: inset -3px 0px 0px transparent;}
+}
+
+/* Étoiles pour la notation des jeux */
+.star-rating, .back-stars, .front-stars {
+    display: flex;
+}
+.star-rating {
+    align-items: center;
+    justify-content: center;
+}
+.back-stars {
+    color: #bb5252;
+    position: relative;
+}
+.front-stars {
+    color: orange;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: all 0.5s;
+}
+
+/* Barre de recherche dans le nav */
+form.research {
+    margin-right: 230px;
+}
+form.research input {
+	outline: none;
+}
+form.research input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+form.research input::-webkit-search-decoration,
+form.research input::-webkit-search-cancel-button {
+	display: none; 
+}
+
+form.research input[type=search] {
+	background: #ededed url('../images/search-icon.png') no-repeat 9px center;
+	border: solid 1px #ccc;
+	padding: 9px 10px 9px 32px;
+	width: 80px;
+	
+	-webkit-border-radius: 10em;
+	-moz-border-radius: 10em;
+	border-radius: 10em;
+	
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+form.research input[type=search]:focus {
+	width: 130px;
+	background-color: #fff;
+	border-color: #1c201d;
+	
+	-webkit-box-shadow: 0 0 5px #343a4080;
+	-moz-box-shadow: 0 0 5px #343a4080;
+	box-shadow: 0 0 5px #343a4080;
+}
+
+form.research input:-moz-placeholder {
+	color: #00000080;
+}
+form.research input::-webkit-input-placeholder {
+	color: #00000080;
+}
+
+/* Slider en haut du profil et de la page d'accueil */
+.carousel-inner {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #00000080;
+}
+
+/* Demandes d'amis sur le profil */
+.list-group, .no-friend {
+	margin-bottom: 20px;
+}
+
+p.titre-profil {
+	font-size: 2.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-bottom: 1.5rem !important;
+	margin-top: 1.5rem !important;
+}
+
+img#profil {
+	min-height: 250px;
+	max-width: 100%;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.item-container {
+	display: flex;
+	padding: 0;
+}
+.item-container p {
+	margin: 0;
+}
+
+.item-left {
+	width: 70%;
+	padding: 12px 20px;
+	border-right: 1px dashed #00000020;
+}
+.item-right {
+	width: 30%;
+	padding: 12px 20px;
+	text-align: center;
+}
+.item-center {
+	width: 100%;
+	padding: 12px 20px;
+	text-align: center;
+}
+
+.plus {
+	color: #008000;
+}
+.plus:hover, .plus:focus {
+	color: #008000d2;
+}
+
+.minus {
+	color: #ff0000;
+}
+.minus:hover, .minus:focus {
+	color: #ff0000d2;
+}
+
+/* Images de profil des amis */
+.friend-profile {
+	text-align: center;
+	padding: 2px;
+}
+.friend-profile img {
+	max-width: 100%;
+	max-height: 180px;
+	padding: 15px;
+}
+.card-body {
+	padding: 15px 20px;
+	border-top: 1px solid #00000020;
+}
+h4.card-title {
+	margin: 0;
+}
+
+.no-friend {
+	padding-left: 15px;
+	font-size: 16px;
+
+}
