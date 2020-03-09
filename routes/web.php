@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/index', 'HomeController@index')->name('index');
+
+Route::get('/profil', 'HomeController@profil')->name('profil');

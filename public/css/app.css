@@ -10890,12 +10890,12 @@ a.text-dark:focus {
     bottom: 0;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 -0.125rem 0.25rem #0000002d !important;
+    box-shadow: 0 -0.125rem 0.25rem #00000033 !important;
 }
 
 .footer-text {
     margin: 0;
-    color: #000000e6;
+    color: #000000cc;
     display: inline-block;
     padding-top: 0.42rem;
     padding-bottom: 0.42rem;
