@@ -10884,23 +10884,3 @@ a.text-dark:focus {
   }
 }
 
-.footer-app {
-    position: absolute;
-    text-align: center;
-    bottom: 0;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0 -0.125rem 0.25rem #0000002d !important;
-}
-
-.footer-text {
-    margin: 0;
-    color: #000000e6;
-    display: inline-block;
-    padding-top: 0.42rem;
-    padding-bottom: 0.42rem;
-    margin-right: 1rem;
-    font-size: 1rem;
-    line-height: inherit;
-    white-space: nowrap;
-}
