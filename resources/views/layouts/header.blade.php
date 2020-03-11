@@ -50,12 +50,12 @@
                 </form>
                 @if (Route::has('login'))
                     @auth
-                        <li c.class="nav-link" href="{{ url('/home') }}">Home</a></li>
+                        <li c.class="nav-link" href="{{ url('/profil') }}"><i class="fas fa-user"></i> Profil</a></li>
                     @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
 
                         @if (Route::has('register'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}"><i class="fas fa-user-add"></i> Inscription</a></li>
                         @endif
                     @endauth
                 @endif
