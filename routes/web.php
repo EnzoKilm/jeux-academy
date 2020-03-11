@@ -17,11 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-<<<<<<< HEAD
-Route::get('/index', 'HomeController@index')->name('index');
 
+Route::get('/index', 'HomeController@index')->name('index');
 Route::get('/profil', 'HomeController@profil')->name('profil');
-=======
 Route::get('/game', 'IndexController@game')->name('game');
-Route::get('/index', 'IndexController@index')->name('index');
->>>>>>> 9de9d23271eb7ee7384ca8b5cd41ef51dbbd1313
+
