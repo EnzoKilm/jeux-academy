@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/login-error', 'IndexController@login')->name('login-error');
 
 Route::get('/index', 'HomeController@index')->name('index');
 Route::get('/profil', 'HomeController@profil')->name('profil');
-Route::get('/game', 'HomeController@game')->name('game');
+Route::get('/game', 'IndexController@game')->name('game');
