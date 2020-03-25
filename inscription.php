@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
             $_POST['mdp']= md5($_POST['mdp']);
             // on se connecte à MySQL et on sélectionne la base
             $db_username = 'root';
-            $db_password = 'admindb';
+            $db_password = '';
             $db_name     = 'jeux-academy';
             $db_host     = 'localhost';
             $db = new mysqli("$db_host","$db_username","$db_password","$db_name");
