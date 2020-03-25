@@ -25,4 +25,14 @@ class IndexController extends Controller
     {
         return view('game');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function login()
+    {
+        return view('auth.login-error');
+    }
 }
