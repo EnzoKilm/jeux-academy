@@ -21,16 +21,6 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function game()
-    {
-        return view('game');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function login()
     {
         $login_error = 'login_error';
