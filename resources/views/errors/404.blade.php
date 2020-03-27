@@ -1,4 +1,4 @@
-@extends('errors::illustrated-layout')
+@extends('errors::app-layout')
 
 @section('title', __('Jeux Academy'))
 @section('code', '404')

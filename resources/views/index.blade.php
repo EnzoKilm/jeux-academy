@@ -8,12 +8,6 @@
                 <div class="card-header">Accueil</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     Bienvenue sur la page d'accueil de Jeux Academy
                 </div>
             </div>
