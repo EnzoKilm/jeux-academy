@@ -17,23 +17,13 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application index.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
-    }
-
-    /**
      * Show the users.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function profil()
     {
-        return view('home');
+        return view('profil');
     }
 
     /**

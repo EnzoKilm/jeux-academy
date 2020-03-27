@@ -55,7 +55,11 @@
                                 <a class="nav-link" href="{{ route('profil') }}">{{ Auth::user()->name }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                                <a class="nav-link" href="#"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i> {{ __('Déconnexion') }}
+                                </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf

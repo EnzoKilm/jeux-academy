@@ -1,5 +1,24 @@
-@extends('layouts.header')
+@extends('layouts.app')
 
-<h1>test</h1>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Accueil</div>
 
-@extends('layouts.footer')
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    Bienvenue sur la page d'accueil de Jeux Academy
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
