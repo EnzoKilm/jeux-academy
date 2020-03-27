@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Jeux Academy</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -52,7 +52,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profil') }}">{{ Auth::user()->name }}</a>
+                                <a class="nav-link" href="{{ route('profil') }}">Profil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"
