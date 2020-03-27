@@ -52,7 +52,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profil') }}">Profil</a>
+                                <a class="nav-link" href="{{ route('profil') }}"><i class="fas fa-user"></i> Profil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"

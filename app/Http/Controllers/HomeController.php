@@ -35,4 +35,14 @@ class HomeController extends Controller
     {
         return view('game');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function editor()
+    {
+        return view('editor');
+    }
 }

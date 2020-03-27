@@ -21,3 +21,4 @@ Route::get('/login-error', 'IndexController@login')->name('login-error');
 Route::get('/index', 'HomeController@index')->name('index');
 Route::get('/profil', 'HomeController@profil')->name('profil');
 Route::get('/game', 'HomeController@game')->name('game');
+Route::get('/editor', 'HomeController@editor')->name('editor');
