@@ -33,6 +33,7 @@ class IndexController extends Controller
      */
     public function login()
     {
-        return view('auth.login-error');
+        $login_error = 'login_error';
+        return view('auth.login', compact('login_error'));
     }
 }
