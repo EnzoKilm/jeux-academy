@@ -34,6 +34,7 @@ class HomeController extends Controller
     public function game()
     {
         return view('game');
+        maVariable;
     }
 
     /**
