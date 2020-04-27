@@ -8,10 +8,10 @@
 
             <div class="card-body">
                 <div class="containerEditor" method="post">
-                    <h2>Ecrivez votre code JS</h2>
+                    <p class="editor-title">Ecrivez votre code JS</p>
                     <form class="editCode" action="{{ route('editor') }}">
                         <textarea id="codeUser" name="codeUser"></textarea>
-                        <input type="submit" value='run'>
+                        <input type="submit" value='Exécuter'>
                     </form>
                 </div>
             </div>
